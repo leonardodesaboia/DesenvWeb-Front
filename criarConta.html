@@ -28,6 +28,10 @@
             <label for="data-nascimento">Data de Nascimento</label>
           </div>
           <div class="inputbox">
+            <input type="text" id="telefone" name="telefone" maxlength="15" oninput="formatarTelefone(this)" required>
+            <label for="telefone">Telefone</label>
+          </div>
+          <div class="inputbox">
             <input type="password" id="password" name="password" required>
             <label for="password">Senha</label>
           </div>
@@ -52,6 +56,20 @@
         alert('Usuário ou senha inválidos');
       }
     });
+
+        function formatarTelefone(input) {
+      let telefone = input.value;
+      
+      telefone = telefone.replace(/\D/g, '');
+
+      if (telefone.length <= 10) {
+        telefone = telefone.replace(/^(\d{2})(\d)/g, '($1) $2');
+      } else {
+        telefone = telefone.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+      }
+
+      input.value = telefone;
+    }
   </script>
 </body>
 

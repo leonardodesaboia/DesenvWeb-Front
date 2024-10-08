@@ -14,18 +14,18 @@
         <form id="loginForm">
           <h2>Formulário</h2>
           <div class="inputbox">
-            <input type="text" id="cpf" name="cpf">
-            <label for="cpf">Usuário</label>
+            <input type="text" id="username" name="username" required>
+            <label for="username">Usuário</label>
           </div>
           <div class="inputbox">
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" required>
             <label for="password">Senha</label>
           </div>
           <div class="forget">
             <a href="./home.html" id="forgot-password">Esqueci a senha</a>
           </div>
           <button type="submit" id="button-entrance">Entrar</button>
-          <a href="criarConta.html"></a><button id="button-create-account">Criar conta</button></a>
+          <button onclick="trocarTela()" id="button-create-account">Criar conta</button>
         </form>
       </div>
     </div>
@@ -34,18 +34,22 @@
   <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const cpfInput = document.getElementById('cpf');
+      const usernameInput = document.getElementById('username');
       const passwordInput = document.getElementById('password');
 
-      const cpf = cpfInput.value;
+      const username = usernameInput.value;
       const password = passwordInput.value;
 
-      if (cpf === '32735687553' && password === '654321') {
-        window.location.href = '/home.html';
+      if (username === 'a' && password === 'a') {
+        window.location.href = '/index.html';
       } else {
         alert('Usuário ou senha inválidos');
       }
     });
+
+    function trocarTela() {
+    window.location.href = "http://127.0.0.1:5500/criarConta.html";
+  }
   </script>
 </body>
 </html>

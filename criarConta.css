@@ -1,4 +1,3 @@
-/* Reseta e estilo geral */
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +11,7 @@ section {
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  background: url(/Trabalho/assets/Background.jpg) no-repeat;
+  background: url(/img/Background.jpg) no-repeat;
   background-position: center;
   background-size: cover;
 }
@@ -30,7 +29,7 @@ section {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 50px ;
 }
 
 h2 {
@@ -63,12 +62,12 @@ h2 {
 }
 
 input[type="date"]::-webkit-datetime-edit {
-  color: transparent; /* Placeholder invisível */
+  color: transparent;
 }
 
 input[type="date"]:focus::-webkit-datetime-edit,
 input[type="date"]:valid::-webkit-datetime-edit {
-  color: #ffffff; /* Texto visível ao focar ou quando há valor */
+  color: #ffffff; 
 }
 
 .inputbox input {
@@ -105,7 +104,7 @@ input[type="date"]:valid::-webkit-datetime-edit {
 }
 
 #button-create-account {
-  background-color: rgb(173, 216, 230);
+  background-color: rgb(51, 187, 232);
   transition: 0.2s;
 }
 
@@ -114,26 +113,7 @@ input[type="date"]:valid::-webkit-datetime-edit {
 }
 
 #button-create-account:hover {
-  background-color: rgb(114, 164, 181);
-}
-
-#button-entrance {
-  background-color: rgb(144, 238, 144);
-  transition: 0.2s;
-}
-
-#button-entrance:hover {
-  background-color: rgb(103, 209, 103);
-}
-
-.forget a {
-  color: #fff;
-  text-decoration: none;
-  margin-top: 10px;
-}
-
-.forget label a:hover {
-  text-decoration: underline;
+  background-color: rgb(101, 203, 236);
 }
 
 button {
