@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="App.css">
+  <title>Criar Conta</title>
+  <link rel="stylesheet" href="criarConta.css">
+</head>
+
+<body>
+  <section>
+    <div class="form-box">
+      <div class="form-value">
+        <form id="loginForm">
+          <h2>Formulário</h2>
+          <div class="inputbox">
+            <input type="text" id="cpf" name="cpf" required>
+            <label for="cpf">Nome completo</label>
+          </div>
+          <div class="inputbox">
+            <input type="email" id="email" name="email" required>
+            <label for="email">Email</label>
+          </div>
+          <div class="inputbox">
+            <input type="date" id="data-nascimento" name="data-nascimento" required>
+            <label for="data-nascimento">Data de Nascimento</label>
+          </div>
+          <div class="inputbox">
+            <input type="password" id="password" name="password" required>
+            <label for="password">Senha</label>
+          </div>
+          <button id="button-create-account"><a href="Home.html">Criar conta</a></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const cpfInput = document.getElementById('cpf');
+      const passwordInput = document.getElementById('password');
+
+      const cpf = cpfInput.value;
+      const password = passwordInput.value;
+
+      if (cpf === '32735687553' && password === '654321') {
+        window.location.href = '/home.html';
+      } else {
+        alert('Usuário ou senha inválidos');
+      }
+    });
+  </script>
+</body>
+
+</html>
