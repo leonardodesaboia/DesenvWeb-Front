@@ -1,0 +1,176 @@
+:root {
+    --background: #f7fafc;
+    --foreground: #1a202c;
+    --primary: #3182ce;
+    --border: #e2e8f0;
+    --input: #edf2f7;
+    --ring: #63b3ed;
+    --primary-foreground: #ffffff;
+    --secondary: #f6ad55;
+    --secondary-foreground: #ffffff;
+    --accent: #68d391;
+    --accent-foreground: #ffffff;
+    --destructive: #f56565;
+    --destructive-foreground: #ffffff;
+    --muted: #718096;
+    --muted-foreground: #ffffff;
+    --card: #ffffff;
+    --card-foreground: #1a202c;
+    --popover: #edf2f7;
+    --popover-foreground: #1a202c;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+  img {
+    border-radius: 0.5rem;
+  }
+  .flex {
+    display: flex;
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-row {
+    flex-direction: row;
+  }
+  .grid {
+    display: grid;
+  }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rounded-lg {
+    border-radius: 1rem;
+  }
+  .shadow-lg {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  .w-full {
+    width: 100%;
+  }
+  .h-64 {
+    height: 16rem;
+  }
+  .h-32 {
+    height: 8rem;
+  }
+  .object-cover {
+    object-fit: cover;
+  }
+  .text-xl {
+    font-size: 1.25rem;
+  }
+  .font-bold {
+    font-weight: 700;
+  }
+  .text-lg {
+    font-size: 1.125rem;
+  }
+  .font-semibold {
+    font-weight: 600;
+  }
+  .inline-block {
+    display: inline-block;
+  }
+  .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  .rounded {
+    border-radius: 0.375rem;
+  }
+  .mt-4 {
+    margin-top: 1rem;
+  }
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+  .mt-6 {
+    margin-top: 1.5rem;
+  }
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  .block {
+    display: block;
+  }
+  .border {
+    border-width: 1px;
+  }
+  .border-border {
+    border-color: var(--border);
+  }
+  .p-2 {
+    padding: 0.5rem;
+  }
+  .p-4 {
+    padding: 1rem;
+  }
+  .w-full {
+    width: 100%;
+  }
+  .bg-secondary {
+    background-color: var(--secondary);
+  }
+  .text-secondary-foreground {
+    color: var(--secondary-foreground);
+  }
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  .text-primary-foreground {
+    color: var(--primary-foreground);
+  }
+  .bg-muted {
+    background-color: var(--muted);
+  }
+  .text-muted-foreground {
+    color: var(--muted-foreground);
+  }
+  .bg-accent {
+    background-color: var(--accent);
+  }
+  .text-accent-foreground {
+    color: var(--accent-foreground);
+  }
+  .bg-destructive {
+    background-color: var(--destructive);
+  }
+  .text-destructive-foreground {
+    color: var(--destructive-foreground);
+  }
+  .hover\:bg-secondary\/80:hover {
+    background-color: rgba(246, 173, 85, 0.8);
+  }
+  #checkin,
+  #checkout,
+  #guests {
+    width: 100%;
+  }
+  #changeDatesBtn {
+    cursor: pointer;
+  }
+  #changeDatesBtn:hover {
+    background-color: #276749;
+  }
+  .container {
+    padding-top: 115px; /* Ajuste o valor de acordo com a altura da navbar */
+  }
+  #navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Para garantir que a navbar fique acima de outros elementos */
+  }
+
+  @media (max-width: 768px) {
+    #conteudo {
+      padding-top: 60px; /* Altura ajustada para telas menores */
+    }
+  }
