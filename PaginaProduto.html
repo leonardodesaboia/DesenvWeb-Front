@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Tourist - Travel Agency HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="PaginaProduto.css">
+    
+    <style>
+        /* Cores e estilos personalizados */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h3 {
+            font-weight: bold;
+        }
+        .text-primary {
+            color: #0056b3; /* Azul semelhante ao da landing page */
+        }
+        .btn-primary {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-primary:hover {
+            background-color: #003d80;
+            border-color: #003d80;
+        }
+        #map {
+            width: 100%;
+            height: 400px;
+        }   
+        /* Navbar fixa */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        /* Margem superior para o conteúdo, devido à navbar fixa */
+        .container {
+            margin-top: 120px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 fixed-top">
+            <a href="" class="navbar-brand p-0">
+                <img id="logo" src="img/logo.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="/index.html" class="nav-item nav-link active">Home</a>
+                    <a href="#about" class="nav-item nav-link">Sobre</a>
+                    <a href="#services" class="nav-item nav-link">Serviços</a>
+                    <a href="#packages" class="nav-item nav-link">Promoções</a>
+                    <a href="#contact" class="nav-item nav-link">Contato</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Destinos</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="/PaginaProduto.html" class="dropdown-item">Cumbuco</a>
+                            <a href="#booking" class="dropdown-item">Jericoacoara</a>
+                            <a href="#team" class="dropdown-item">Praia do Futuro</a>
+                            <a href="#testimonial" class="dropdown-item">Morro Branco</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="Login.html" class="btn btn-primary rounded-pill py-2 px-4">Registrar</a>
+            </div>
+        </nav>
+
+        <!-- Container principal -->
+        <div class="container my-5">
+            <!-- Título do passeio -->
+            <div class="text-center" >
+                <h1 class="display-4">Passeio pelas Praias do Ceará</h1>
+                <p class="lead text-primary">Descubra as paisagens paradisíacas com a BM Turismo!</p>
+            </div>
+            
+            <!-- Informações do Passeio -->
+            <div class="row my-4">
+                <div class="col-md-6">
+                    <h3>Roteiro do Passeio</h3>
+                    <p>Saída: Praia de Iracema, Fortaleza</p>
+                    <ul>
+                        <li>1ª Parada: Praia do Futuro</li>
+                        <li>2ª Parada: Praia das Fontes</li>
+                        <li>3ª Parada: Canoa Quebrada</li>
+                        <li>Retorno: Praia de Iracema, Fortaleza</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Sobre o Guia</h3>
+                    <p>Nome: Felipe de Paula</p>
+                    <p>Experiência: Guia certificado com mais de 10 anos de experiência em turismo na região.</p>
+                </div>
+            </div>
+            
+            <!-- Mapa do Passeio -->
+            <div id="map" class="my-4"></div>
+            <script>
+                function initMap() {
+                    var startPoint = {lat: -3.71839, lng: -38.5434}; // Fortaleza
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 8,
+                        center: startPoint
+                    });
+
+                    var route = [
+                        {lat: -3.71839, lng: -38.5434}, // Fortaleza
+                        {lat: -3.7404, lng: -38.4916}, // Praia do Futuro
+                        {lat: -4.1624, lng: -38.1691}, // Praia das Fontes
+                        {lat: -4.5288, lng: -37.7721}  // Canoa Quebrada
+                    ];
+
+                    var path = new google.maps.Polyline({
+                        path: route,
+                        geodesic: true,
+                        strokeColor: "#FF0000",
+                        strokeOpacity: 1.0,
+                        strokeWeight: 2
+                    });
+
+                    path.setMap(map);
+                }
+
+                window.onload = initMap;
+            </script>
+            
+            <!-- Área de Preços -->
+            <div class="row my-5">
+                <div class="col-md-6">
+                    <h3>Preços</h3>
+                    <p>R$ 250,00 por pessoa</p>
+                    <p>Descontos para grupos acima de 5 pessoas</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <button class="btn btn-primary btn-lg">Reserve agora</button>
+                </div>
+            </div>
+            
+            <!-- Galeria de Fotos -->
+            <div class="my-5">
+                <h3 class="text-center">Galeria de Fotos</h3>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <img src="img/Cumbuco.jpg" class="img-fluid" alt="Foto da praia">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="img/Cumbuco2.jpg" class="img-fluid" alt="Foto da praia">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="img/Cumbuco3.jpg" class="img-fluid" alt="Foto da praia">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Informações adicionais -->
+            <div class="my-5">
+                <h3>O que está incluído no passeio</h3>
+                <ul>
+                    <li>Transporte ida e volta</li>
+                    <li>Guia turístico especializado</li>
+                    <li>Água e lanches durante o trajeto</li>
+                    <li>Equipamentos de segurança</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

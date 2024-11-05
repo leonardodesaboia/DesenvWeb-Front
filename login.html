@@ -14,39 +14,27 @@
         <form id="loginForm">
           <h2>Formulário</h2>
           <div class="inputbox">
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username" >
             <label for="username">Usuário</label>
           </div>
           <div class="inputbox">
-            <input type="text" id="cpf" name="cpf" required>
-            <label for="cpf">CPF</label>
+            <input type="password" id="senha" name="senha" >
+            <label for="senha">Senha</label>
           </div>
           <div class="forget">
-            <a href="./home.html" id="forgot-password">Esqueci a senha</a>
+            <a href="./ForgotPassword.html" id="forgot-password">Esqueci a senha</a>
           </div>
-          <button type="submit" id="button-entrance">Entrar</button>
-          <button onclick="trocarTela()" id="button-create-account">Criar conta</button>
+          <button onclick="trocarTelaHome()" id="button-entrance"><a href="/index.html" style="color: black;">Entrar</a></button>
+          <button onclick="trocarTela()" id="button-create-account"><a href="/criarConta.html" style="color: black">Criar conta</a></button>
         </form>
       </div>
     </div>
   </section>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const usernameInput = document.getElementById('username');
-      const passwordInput = document.getElementById('password');
-
-      const username = usernameInput.value;
-      const password = passwordInput.value;
-
-      if (username === 'a' && password === 'a') {
-        window.location.href = '/index.html';
-      } else {
-        alert('Usuário ou senha inválidos');
-      }
-    });
-
+    function trocarTelaHome() {
+    window.location.href = "http://127.0.0.1:5500/index.html";
+  }
     function trocarTela() {
     window.location.href = "http://127.0.0.1:5500/criarConta.html";
   }
