@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>BM Turismo - Confirmação de Pedido</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Libraries Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ffc107;
+            --secondary: #FE8800;
+            --light: #F5F5F5;
+            --dark: #14141F;
+        }
+
+        .hero-header {
+            background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)), url('img/Cumbuco2.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            font-family: 'Nunito', sans-serif;
+            position: relative;
+            margin-right: 25px;
+            padding: 35px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+            outline: none;
+            transition: .5s;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::before {
+            position: absolute;
+            content: "";
+            width: 45px;
+            height: 2px;
+            top: 50%;
+            left: -55px;
+            margin-top: -1px;
+            background: var(--primary);
+        }
+
+        .section-title::after {
+            position: absolute;
+            content: "";
+            width: 45px;
+            height: 2px;
+            top: 50%;
+            right: -55px;
+            margin-top: -1px;
+            background: var(--primary);
+        }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .order-card {
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 20px;
+            bottom: -15px;
+            width: 2px;
+            background: var(--primary);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow sticky-top bg-white px-4 px-lg-5 py-3 py-lg-0">
+        <a href="" class="navbar-brand p-0">
+            <img src="img/logo.png" alt="Logo" class="img-fluid">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="#about" class="nav-item nav-link">Sobre</a>
+                <a href="#services" class="nav-item nav-link">Serviços</a>
+                <a href="#packages" class="nav-item nav-link">Promoções</a>
+                <a href="#contact" class="nav-item nav-link">Contato</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Destinos</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="cumbuco.html" class="dropdown-item">Cumbuco</a>
+                        <a href="jericoacoara.html" class="dropdown-item">Jericoacoara</a>
+                        <a href="praia-futuro.html" class="dropdown-item">Praia do Futuro</a>
+                        <a href="morro-branco.html" class="dropdown-item">Morro Branco</a>
+                    </div>
+                </div>
+            </div>
+            <a href="login.html" class="btn btn-primary rounded-pill py-2 px-4 ms-3">Registrar</a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+        <div class="container py-5">
+            <div class="row justify-content-center py-5">
+                <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">Confirmação de Pedido</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="#" class="text-white">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="text-white">Pedidos</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Confirmação</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Confirmation Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Pedido Confirmado</h6>
+                <h1 class="mb-5">Pedido #BM2024051234</h1>
+            </div>
+
+            <div class="row g-4">
+                <!-- Detalhes do Passeio -->
+                <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="order-card p-4 mb-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <img src="img/Cumbuco.jpg" alt="Praia do Cumbuco" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <h3>Passeio Praia do Cumbuco</h3>
+                                <p class="text-muted mb-2">Data do Passeio: 15/05/2024</p>
+                                <p class="mb-0"><i class="fa fa-clock text-primary me-2"></i>Duração: 8 horas (08:00 - 17:00)</p>
+                                <p class="mb-0"><i class="fa fa-map-marker-alt text-primary me-2"></i>Saída: Hotel Marina Park</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detalhes da Reserva -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="order-card p-4 h-100">
+                        <h4 class="mb-4">Detalhes da Reserva</h4>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Adultos (2x)</span>
+                            <span>R$ 360,00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Crianças (1x)</span>
+                            <span>R$ 90,00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Taxa de serviço</span>
+                            <span>R$ 45,00</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total</span>
+                            <span class="text-primary">R$ 495,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cronograma -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="order-card p-4 h-100">
+                        <h4 class="mb-4">Cronograma do Dia</h4>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h6>08:00 - Saída</h6>
+                                <p class="mb-0">Encontro no Hotel Marina Park</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>09:00 - Chegada</h6>
+                                <p class="mb-0">Café da manhã regional</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>10:00 - Atividades</h6>
+                                <p class="mb-0">Passeio de buggy pelas dunas</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>12:30 - Almoço</h6>
+                                <p class="mb-0">Restaurante local</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>17:00 - Retorno</h6>
+                                <p class="mb-0">Chegada ao hotel</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações Importantes -->
+                <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="order-card p-4">
+                        <h4 class="mb-4">Informações Importantes</h4>
+                        <div class="row g-4">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <i class="fa fa-suitcase fa-3x text-primary mb-3"></i>
+                                    <h6>O que levar</h6>
+                                    <p class="mb-0">Protetor solar, roupas de banho, toalha</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <i class="fa fa-id-card fa-3x text-primary mb-3"></i>
+                                    <h6>Documentos</h6>
+                                    <p class="mb-0">Documento com foto para embarque</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <i class="fa fa-phone-alt fa-3x text-primary mb-3"></i>
+                                    <h6>Suporte 24h</h6>
+                                    <p class="mb-0">(85) 9999-9999</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <i class="fa fa-envelope fa-3x text-primary mb-3"></i>
+                                    <h6>E-mail</h6>
+                                    <p class="mb-0">Confirmação enviada</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botões -->
+                <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.9s">
+                    <button class="btn btn-primary py-3 px-5" onclick="window.print()">
+                        <i class="fa fa-print me-2"></i>Imprimir Comprovante
+                    </button>
+                    <a href="index.html" class="btn btn-outline-primary py-3 px-5 ms-3">
+                        <i class="fa fa-home me-2"></i>Voltar ao Início
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Confirmation End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Companhia</h4>
+                    <a class="btn btn-link" href="">Sobre Nós</a>
+                    <a id="contact" class="btn btn-link" href="">Contate-nos</a>
+                    <!--<a class="btn btn-link" href="">Privacy Policy</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">FAQs & Help</a>-->
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contato</h4>
+                    <p class="mb-2"><i class="fa fa-moap-marker-alt me-3"></i>Fortaleza, CE</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+55 85 345 67890</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>Felipao@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Galeria</h4>
+                    <div class="row g-2 pt-2">
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="img/praia-cumbuco.webp" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="img/Cumbuco.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="img/jericoacoara.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="img/praia-de-canoa-quebrada.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="img/Cumbuco3.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="img/praia-do-futuro (1).jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+    <!-- Footer End -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3."></script>
+    </body>
+
+</html>
