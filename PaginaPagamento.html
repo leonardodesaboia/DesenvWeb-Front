@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tourist - Travel Agency HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+</head>
+<!-- Estilo específico para a seção de pagamento -->
+<style>
+    .payment-section {
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .payment-section .section-title {
+        position: relative;
+        display: inline-block;
+    }
+
+    .payment-section .section-title::before {
+        position: absolute;
+        content: "";
+        width: 45px;
+        height: 2px;
+        top: 50%;
+        left: -55px;
+        margin-top: -1px;
+        background: var(--primary);
+    }
+
+    .payment-section .section-title::after {
+        position: absolute;
+        content: "";
+        width: 45px;
+        height: 2px;
+        top: 50%;
+        right: -55px;
+        margin-top: -1px;
+        background: var(--primary);
+    }
+
+    .qr-code-container {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 2rem;
+    }
+
+    .pix-steps {
+        counter-reset: step;
+    }
+
+    .pix-steps li {
+        counter-increment: step;
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+        position: relative;
+    }
+
+    .pix-steps li::before {
+        content: counter(step);
+        background: var(--primary);
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .payment-info {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .copy-button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+    .copy-button:hover {
+        opacity: 0.9;
+    }
+</style>
+
+<!-- HTML do Formulário de Pagamento -->
+<div class="container-xxl py-5 payment-section">
+    <div class="container">
+        <div class="text-center">
+            <h6 class="section-title bg-white text-center text-primary px-3">Pagamento</h6>
+            <h1 class="mb-5">Finalizar Reserva</h1>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <!-- Resumo da Compra -->
+            <div class="col-lg-4">
+                <div class="payment-info p-4">
+                    <h4 class="mb-4">Resumo da Reserva</h4>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Adultos (x<span id="summary-adults">1</span>)</span>
+                        <span id="summary-adults-price">R$ 180,00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Horário</span>
+                        <span id="summary-time">07:00</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-0">
+                        <h5>Total</h5>
+                        <h5 id="summary-total">R$ 180,00</h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de Pagamento -->
+            <div class="col-lg-6">
+                <div class="payment-info p-4">
+                    <h4 class="mb-4">Pagamento via PIX</h4>
+                    
+                    <div class="qr-code-container text-center mb-4">
+                        <img src="/img/pix.png" alt="QR Code PIX" class="mb-3">
+                        <div class="mt-3">
+                            <p class="mb-2">Código PIX</p>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" value="00020126580014br.gov.bcb.pix0136123e4567-e12b-12d1-a456-426655440000" readonly>
+                                <button class="copy-button" onclick="copyPixCode()">
+                                    <i class="fas fa-copy me-2"></i>Copiar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-3">Como pagar com PIX:</h5>
+                        <ul class="pix-steps list-unstyled">
+                            <li>Abra o aplicativo do seu banco</li>
+                            <li>Escolha a opção "Pagar com PIX"</li>
+                            <li>Escaneie o QR Code ou cole o código PIX</li>
+                            <li>Confirme as informações e finalize o pagamento</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-light p-3 rounded mb-4">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-clock text-primary me-2"></i>
+                            <p class="mb-0">O pagamento será confirmado em até 5 minutos</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary w-100 py-3" onclick="checkPayment()">
+                        Já realizei o pagamento
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para funcionalidades da página de pagamento -->
+<script>
+    // Função para atualizar o resumo da compra
+    function updateSummary(adults, children, time, total) {
+        document.getElementById('summary-adults').textContent = adults;
+        document.getElementById('summary-children').textContent = children;
+        document.getElementById('summary-time').textContent = time;
+        document.getElementById('summary-adults-price').textContent = `R$ ${(adults * 180).toFixed(2)}`;
+        document.getElementById('summary-children-price').textContent = `R$ ${(children * 90).toFixed(2)}`;
+        document.getElementById('summary-total').textContent = `R$ ${total.toFixed(2)}`;
+    }
+
+    // Função para copiar código PIX
+    function copyPixCode() {
+        const pixInput = document.querySelector('.input-group input');
+        pixInput.select();
+        document.execCommand('copy');
+        
+        // Feedback visual
+        const copyButton = document.querySelector('.copy-button');
+        const originalText = copyButton.innerHTML;
+        copyButton.innerHTML = '<i class="fas fa-check me-2"></i>Copiado!';
+        setTimeout(() => {
+            copyButton.innerHTML = originalText;
+        }, 2000);
+    }
+
+    // Função para verificar pagamento
+    function checkPayment() {
+        // Aqui você implementaria a verificação real do pagamento
+        // Por enquanto, apenas simularemos uma confirmação
+        alert('Pagamento confirmado com sucesso! Você receberá um e-mail com os detalhes da sua reserva.');
+        // Redirecionar para página de confirmação ou home
+        // window.location.href = 'confirmacao.html';
+    }
+</script>

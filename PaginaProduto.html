@@ -15,13 +15,12 @@
     <!-- Libraries Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Customized Bootstrap Stylesheet -->
+    <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Template Stylesheet -->
+    <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
     <style>
-
         .btn {
             font-weight: 500;
             text-transform: uppercase;
@@ -171,14 +170,14 @@
                 <a href="#packages" class="nav-item nav-link">Promoções</a>
                 <a href="#contact" class="nav-item nav-link">Contato</a>
                 <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Destinos</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="/PaginaProduto.html" class="dropdown-item">Cumbuco</a>
-                            <a href="#booking" class="dropdown-item">Jericoacoara</a>
-                            <a href="#team" class="dropdown-item">Praia do Futuro</a>
-                            <a href="#testimonial" class="dropdown-item">Morro Branco</a>
-                        </div>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Destinos</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="/PaginaProduto.html" class="dropdown-item">Cumbuco</a>
+                        <a href="#booking" class="dropdown-item">Jericoacoara</a>
+                        <a href="#team" class="dropdown-item">Praia do Futuro</a>
+                        <a href="#testimonial" class="dropdown-item">Morro Branco</a>
                     </div>
+                </div>
             </div>
             <a href="login.html" class="btn btn-primary rounded-pill py-2 px-4 ms-3">Registrar</a>
         </div>
@@ -221,7 +220,6 @@
                         <div class="col-6 text-end">
                             <img class="img-fluid rounded w-100 h-100" src="img/praia-de-canoa-quebrada.jpg" alt="">
                         </div>
-                        
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -259,25 +257,72 @@
                         <div class="col-12">
                             <h5 class="mb-3">Pontos de Saída</h5>
                             <div id="map" style="height: 200px; background-color: #eee;" class="rounded">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.413653792276!2d-38.53263652521402!3d-3.7196114962543123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c749b5b586aceb%3A0xf1e876b36bb97f14!2sMarina%20Park%20Hotel!5e0!3m2!1spt-BR!2sbr!4v1730987044059!5m2!1spt-BR!2sbr" width="600" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <h5 class="mb-3">Preços</h5>
-                            <div class="bg-light p-4 rounded">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h3 class="mb-0">R$ 180,00</h3>
-                                        <small>por pessoa</small>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Reservar</a>
-                                    </div>
-                                </div>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.413653792276!2d-38.53263652521402!3d-3.7196114962543123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c749b5b586aceb%3A0xf1e876b36bb97f14!2sMarina%20Park%20Hotel!5e0!3m2!1spt-BR!2sbr!4v1730987044059!5m2!1spt-BR!2sbr" width="600" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Substituir a div atual do booking-form por este código -->
+<div class="col-12 mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">Reserva do Passeio</h5>
+        </div>
+        <div class="card-body">
+            <!-- Seleção de Passageiros -->
+            <div class="mb-4">
+                <label class="form-label fw-bold">Passageiros</label>
+                <div class="d-flex align-items-center gap-3 mb-3 p-3 bg-light rounded">
+                    <div>
+                        <p class="mb-0">Adultos</p>
+                        <small class="text-muted">R$ 180,00 por pessoa</small>
+                    </div>
+                    <div class="input-group" style="width: 150px;">
+                        <button class="btn btn-outline-secondary" type="button" onclick="decrementAdults()">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" class="form-control text-center" id="adultsCount" value="1" min="1" max="8" readonly>
+                        <button class="btn btn-outline-secondary" type="button" onclick="incrementAdults()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seleção de Horário -->
+            <div class="mb-4">
+                <label class="form-label fw-bold">Horário do Passeio</label>
+                <div class="row g-2">
+                    <div class="col-md-3 col-6">
+                        <input type="radio" class="btn-check" name="tourTime" id="time1" value="07:00">
+                        <label class="btn btn-outline-primary w-100" for="time1">07:00</label>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <input type="radio" class="btn-check" name="tourTime" id="time2" value="08:00">
+                        <label class="btn btn-outline-primary w-100" for="time2">08:00</label>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <input type="radio" class="btn-check" name="tourTime" id="time3" value="09:00">
+                        <label class="btn btn-outline-primary w-100" for="time3">09:00</label>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <input type="radio" class="btn-check" name="tourTime" id="time4" value="10:00">
+                        <label class="btn btn-outline-primary w-100" for="time4">10:00</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total e Botão de Reserva -->
+            <div class="border-top pt-4">
+                <div class="d-flex justify-content-between align-items-center mb-4 pt-2 border-top mt-2">
+                    <span class="h5 mb-0 fw-bold">Total:</span>
+                    <span class="h4 mb-0 fw-bold" id="totalPrice">R$ 180,00</span>
+                </div>
+                <button class="btn btn-primary w-100 py-3" onclick="bookTour()">Reservar Agora</button>
+            </div>
+        </div>
+    </div>
+</div>
                 </div>
             </div>
         </div>
@@ -341,13 +386,10 @@
                     <h4 class="text-white mb-3">Companhia</h4>
                     <a class="btn btn-link" href="">Sobre Nós</a>
                     <a id="contact" class="btn btn-link" href="">Contate-nos</a>
-                    <!--<a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">FAQs & Help</a>-->
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Contato</h4>
-                    <p class="mb-2"><i class="fa fa-moap-marker-alt me-3"></i>Fortaleza, CE</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Fortaleza, CE</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+55 85 345 67890</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>Felipao@gmail.com</p>
                     <div class="d-flex pt-2">
@@ -380,19 +422,74 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/tempusdominus/js/moment.min.js"></script>
-        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Scripts necessários -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- React e dependências para o formulário de reserva -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/lucide-react@0.263.1"></script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-                
-    </body>
+
+    <!-- Script para inicializar o formulário de reserva -->
+    <script>
+        // Inicializar o componente React
+        const bookingFormContainer = document.getElementById('booking-form');
+        if (bookingFormContainer) {
+            ReactDOM.render(React.createElement(BookingForm), bookingFormContainer);
+        }
+        
+        let adultsCount = 1;
+        const adultPrice = 180;
+
+    function updatePrice() {
+        const total = (adultsCount * adultPrice);
+        document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
+    }
+
+    function incrementAdults() {
+        if (adultsCount < 8) {
+            adultsCount++;
+            document.getElementById('adultsCount').value = adultsCount;
+            updatePrice();
+        }
+    }
+
+    function decrementAdults() {
+        if (adultsCount > 1) {
+            adultsCount--;
+            document.getElementById('adultsCount').value = adultsCount;
+            updatePrice();
+        }
+    }
+
+    
+
+    function bookTour() {
+        const selectedTime = document.querySelector('input[name="tourTime"]:checked')?.value;
+        if (!selectedTime) {
+            alert('Por favor, selecione um horário para o passeio.');
+            return;
+        }
+        
+        alert(`Reserva realizada com sucesso!\n\nAdultos: ${adultsCount}\nCrianças: ${childrenCount}\nHorário: ${selectedTime}\nTotal: R$ ${(adultsCount * adultPrice + childrenCount * childPrice).toFixed(2)}`);
+    }
+
+
+</script>
+</body>
 </html>
