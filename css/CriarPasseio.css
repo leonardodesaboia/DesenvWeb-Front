@@ -1,0 +1,154 @@
+/* Estilo para a tabela de reservas */
+#visualizar-reservas {
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+}
+
+#visualizar-reservas table {
+    font-size: 1rem;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#visualizar-reservas thead {
+    background-color: #1a237e;
+    color: white;
+    font-weight: bold;
+}
+
+#visualizar-reservas td, #visualizar-reservas th {
+    padding: 10px;
+    text-align: left;
+}
+
+#visualizar-reservas tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+body {
+    background: url('../img/paineladm.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+
+section {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com transparência */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+
+/* Navbar */
+.navbar {
+    background-color: white !important;
+    border-bottom: 2px solid #ccc; /* Linha inferior */
+}
+
+.navbar .navbar-brand {
+    color: #ffc107 !important; /* Amarelo */
+    font-size: 2.5rem; /* Maior tamanho */
+    text-align: center;
+    font-weight: bold;
+    flex: 1;
+}
+
+.navbar .btn-warning {
+    background-color: #ffc107 !important; /* Amarelo */
+    color: black !important; /* Texto preto */
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.navbar .btn-warning:hover {
+    background-color: #ffd54f !important; /* Amarelo mais claro */
+    transition: background-color 0.3s;
+}
+
+.navbar .btn-sair {
+    background-color: #ffc107 !important; /* Amarelo */
+    color: #000 !important; /* Preto */
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+
+/* Botão "Sair" */
+.navbar .btn {
+    background-color: #fbc02d; /* Amarelo */
+    color: black;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.navbar .btn:hover {
+    background-color: #fdd835; /* Amarelo mais claro no hover */
+    color: black;
+    transition: background-color 0.3s ease-in-out;
+}
+/* Botão Criar Passeio com Azul Claro */
+button {
+    font-size: 1.2rem;
+    color: black; /* Texto preto */
+    background-color: #90caf9; /* Azul claro */
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background-color: #64b5f6; /* Azul ainda mais claro no hover */
+    transition: background-color 0.3s ease-in-out;
+}
+/* Estilo do Botão "Criar Passeio" */
+#criar-passeio .btn-primary {
+    background-color: #1a237e !important; /* Azul escuro */
+    color: #ffffff !important; /* Texto branco */
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    padding: 12px 20px;
+    text-transform: uppercase;
+}
+
+#criar-passeio .btn-primary:hover {
+    background-color: #3949ab !important; /* Azul mais claro */
+    transition: background-color 0.3s;
+}
+
+/* Negrito para campos preenchidos */
+#criar-passeio input.filled,
+#criar-passeio textarea.filled {
+    font-weight: bold !important; /* Texto em negrito */
+    color: #000000 !important; /* Azul escuro */
+
+}
+
+/* Estilo básico para a pré-visualização */
+#tour-preview h5,
+#tour-preview p {
+    font-weight: bold;
+    color: #333; /* Texto escuro */
+    margin-bottom: 10px;
+}
+
+#location-suggestions {
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+#location-suggestions .list-group-item {
+    cursor: pointer;
+}
+

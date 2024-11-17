@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/CriarPasseio.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <span class="navbar-brand mx-auto text-warning fw-bold text-center" style="font-size: 2rem;">
+                Bem-vindo ao Painel Administrativo
+            </span>
+            <button id="logout-btn" class="btn btn-warning btn-sm text-dark fw-bold">Sair</button>
+
+        </div>
+    </nav>
+    <!-- Seção de Visualizar Reservas -->
+    <section id="reservas" class="container py-5">
+    <h2 class="text-primary mb-4">Reservas</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>#</th>
+                    <th>Nome do Cliente</th>
+                    <th>Passeio</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="reservas-body">
+                <!-- Reservas serão inseridas dinamicamente -->
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+    <!-- Seção de Criar Passeio -->
+    <section id="criar-passeio" class="container py-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- Formulário -->
+                <form id="create-tour-form" class="shadow-lg p-4 rounded-lg bg-white">
+                    <h3 class="text-primary mb-4">Criar Passeio</h3>
+
+                    <!-- Nome do Passeio -->
+                    <div class="mb-3">
+                        <label for="tour-name" class="form-label">Nome do Passeio</label>
+                        <input type="text" id="tour-name" class="form-control" placeholder="Ex: Passeio nas Dunas" required>
+                    </div>
+
+                    <!-- Descrição -->
+                    <div class="mb-3">
+                        <label for="tour-description" class="form-label">Descrição</label>
+                        <textarea id="tour-description" class="form-control" rows="3" placeholder="Descreva o passeio" required></textarea>
+                    </div>
+
+                    <!-- Preço -->
+                    <div class="mb-3">
+                        <label for="tour-price" class="form-label">Preço por Pessoa (R$)</label>
+                        <input type="number" id="tour-price" class="form-control" placeholder="Ex: 250.00" required>
+                    </div>
+
+                    <!-- Capacidade -->
+                    <div class="mb-3">
+                        <label for="tour-capacity" class="form-label">Número Máximo de Pessoas</label>
+                        <input type="number" id="tour-capacity" class="form-control" placeholder="Ex: 10" required>
+                    </div>
+
+                    <!-- Localização -->
+                    <div class="mb-3 position-relative">
+                        <label for="tour-location" class="form-label">Localização</label>
+                        <input type="text" id="tour-location" class="form-control" placeholder="Digite um endereço" required>
+                        <ul id="location-suggestions" class="list-group mt-2" style="display: none; position: absolute; width: 100%; z-index: 1000;"></ul>
+                    </div>
+
+                    <!-- Data -->
+                    <div class="mb-3">
+                        <label for="tour-date" class="form-label">Data</label>
+                        <input type="date" id="tour-date" class="form-control" required>
+                    </div>
+
+                    <!-- Horário -->
+                    <div class="mb-3">
+                        <label for="tour-time" class="form-label">Horário</label>
+                        <input type="time" id="tour-time" class="form-control" required>
+                    </div>
+
+                    <!-- Upload de Imagens -->
+                    <div class="mb-3">
+                        <label for="tour-images" class="form-label">Imagens do Passeio</label>
+                        <input type="file" id="tour-images" class="form-control" accept="image/*" multiple required>
+                        <small class="form-text text-muted">Você pode adicionar várias imagens.</small>
+                    </div>
+
+                    <!-- Botão Criar -->
+                    <button type="submit" class="btn btn-primary w-100 py-2" id="create-tour-btn">Criar Passeio</button>
+
+                </form>
+            </div>
+
+            <!-- Pré-visualização -->
+            <div class="col-lg-6">
+                <div class="bg-light rounded-lg shadow-lg p-4">
+                    <h4 class="text-primary mb-4">Pré-visualização do Passeio</h4>
+                    <div id="tour-preview" class="d-flex flex-column gap-3">
+                        <h5 class="text-muted">Preencha os campos para ver a pré-visualização</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery e JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/admpasseio.js"></script> 
+    <script src="js/admreserva.js"></script> 
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete">
+</script>
+
+</body>
+</html>
