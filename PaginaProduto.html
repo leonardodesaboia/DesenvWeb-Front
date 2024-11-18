@@ -157,7 +157,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-light shadow sticky-top bg-white px-4 px-lg-5 py-3 py-lg-0">
         <a href="" class="navbar-brand p-0">
-            <img src="/img/logo.png" alt="Logo" class="img-fluid">
+            <img src="img/logo.png" alt="Logo" class="img-fluid">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
@@ -172,7 +172,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Destinos</a>
                     <div class="dropdown-menu m-0">
-                        <a href="/PaginaProduto.html" class="dropdown-item">Cumbuco</a>
+                        <a href="PaginaProduto.html" class="dropdown-item">Cumbuco</a>
                         <a href="#booking" class="dropdown-item">Jericoacoara</a>
                         <a href="#team" class="dropdown-item">Praia do Futuro</a>
                         <a href="#testimonial" class="dropdown-item">Morro Branco</a>
@@ -318,7 +318,9 @@
                     <span class="h5 mb-0 fw-bold">Total:</span>
                     <span class="h4 mb-0 fw-bold" id="totalPrice">R$ 180,00</span>
                 </div>
-                <button class="btn btn-primary w-100 py-3" onclick="bookTour()">Reservar Agora</button>
+                <button class="btn btn-primary w-100 py-3" onclick="bookTour()">
+                    Reservar Agora
+                </button>
             </div>
         </div>
     </div>
@@ -476,18 +478,41 @@
             updatePrice();
         }
     }
-
-    
-
+//Rascunho 12/11 se não quiser passar os valores para o PaginaPagamento.html, basta colocar o que esta no bloco de notas!
     function bookTour() {
-        const selectedTime = document.querySelector('input[name="tourTime"]:checked')?.value;
-        if (!selectedTime) {
-            alert('Por favor, selecione um horário para o passeio.');
-            return;
-        }
-        
-        alert(`Reserva realizada com sucesso!\n\nAdultos: ${adultsCount}\nCrianças: ${childrenCount}\nHorário: ${selectedTime}\nTotal: R$ ${(adultsCount * adultPrice + childrenCount * childPrice).toFixed(2)}`);
+    // Captura o número de adultos
+    const adultsCount = document.getElementById('adultsCount').value;
+
+    // Captura o horário selecionado
+    const selectedTime = document.querySelector('input[name="tourTime"]:checked')?.value;
+    
+    // Verifica se o horário foi selecionado
+    if (!selectedTime) {
+        alert('Por favor, selecione um horário para o passeio.');
+        return;
     }
+
+    // Preço por adulto
+    const pricePerAdult = 180;
+
+    // Calcula o preço total
+    const totalPrice = adultsCount * pricePerAdult;
+
+    // Armazena os dados no localStorage
+    localStorage.setItem('adultsCount', adultsCount);
+    localStorage.setItem('selectedTime', selectedTime);
+    localStorage.setItem('totalPrice', totalPrice.toFixed(2));
+
+    // Exibe a confirmação com os dados no alerta
+    alert(`Reserva realizada com sucesso! Você selecionou ${adultsCount} adulto(s) para o passeio no horário ${selectedTime}.\nO preço total é: R$ ${totalPrice.toFixed(2)}`);
+
+    // Redireciona para a página de pagamento
+    window.location.href = "PaginaPagamento.html";
+}
+
+
+
+
 
 
 </script>
