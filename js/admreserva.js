@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
             horario: "08:00",
             status: "Confirmado"
         }
+    
     ];
 
     const reservasBody = document.getElementById("reservas-body");

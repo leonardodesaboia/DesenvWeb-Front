@@ -1,0 +1,5 @@
+/* Campos preenchidos em negrito */
+input.filled {
+    font-weight: bold !important;
+    color: #000000 !important; /* Azul escuro */
+}
