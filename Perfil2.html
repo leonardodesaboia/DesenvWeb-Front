@@ -4,142 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil do Usuário</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-        /* Cores de referência */
-        :root {
-            --primary-color: #1b1464; /* Azul principal */
-            --secondary-color: #3b5998; /* Azul secundário para títulos e botões */
-            --background-color: #f1f1f1; /* Fundo claro */
-            --text-color: #666; /* Cinza para texto */
-        }
-
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            background-color: var(--background-color);
+            background-color: #87CEEB;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
 
-        .container {
+        .navbar {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
             display: flex;
-            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* Para posicionar o botão 'Sair' corretamente */
+        }
+
+        .navbar-brand {
+            color: #FFD700;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #logout-btn {
+            position: absolute;
+            right: 20px;
         }
 
         .profile-card, .booking-section {
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #ffffff;
             border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
         .profile-card {
-            width: 320px;
+            width: 300px;
             text-align: center;
         }
 
         .profile-card img {
+            border-radius: 50%;
             width: 100px;
             height: 100px;
-            border-radius: 50%;
-            background-color: var(--background-color);
             margin-bottom: 10px;
         }
 
-        .profile-card h2 {
-            color: var(--primary-color);
-            margin: 10px 0 5px;
-            font-size: 22px;
-        }
-
-        .profile-card p {
-            color: var(--text-color);
-            font-size: 14px;
-            margin: 5px 0;
-        }
-
-        .info-field {
-            color: var(--secondary-color);
-            font-weight: bold;
-            margin-top: 8px;
-            font-size: 15px;
+        .container {
+            display: flex;
+            gap: 20px; /* Espaço entre os dois elementos */
+            align-items: flex-start; /* Alinha os elementos no topo */
+            padding: 20px; /* Menor espaço ao redor do container */
+            justify-content: space-between; /* Ajusta o espaço entre os elementos */
         }
 
         .booking-section {
-            width: 480px;
+            flex-grow: 1; /* Faz a seção de reservas ocupar o espaço restante */
         }
 
-        .booking-section h3 {
-            color: var(--primary-color);
-            font-size: 20px;
-            margin-bottom: 15px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .booking-item {
-            background-color: var(--background-color);
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 10px;
+        table th, table td {
+            text-align: left;
+            padding: 10px;
         }
 
-        .booking-item h4 {
-            color: var(--secondary-color);
-            font-size: 16px;
-            margin: 0 0 5px;
+        table th {
+            background-color: #2B2B6E;
+            color: #ffffff;
         }
 
-        .booking-item p {
-            color: var(--text-color);
-            font-size: 14px;
-            margin: 0;
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .btn.cancel {
+            background-color: #FF4D4D;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 4px;
+            border: none;
+            padding: 5px 10px;
+        }
+
+        .btn-warning {
+            background-color: #FFD700;
+            border: none;
+            color: #333333;
+            padding: 10px 15px;
         }
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <span class="navbar-brand">Bem-vindo ao seu Perfil</span>
+        <button id="logout-btn" class="btn btn-warning">Sair</button>
+    </nav>
+
     <div class="container">
+        <!-- Cartão de perfil do usuário -->
         <div class="profile-card">
             <img src="https://via.placeholder.com/100" alt="Foto do usuário">
             <h2>Nome Completo</h2>
-            <p class="info-field">Email:</p>
-            <p>usuario@email.com</p>
-            
-            <p class="info-field">CPF:</p>
-            <p>000.000.000-00</p>
-            
-            <p class="info-field">Data de Nascimento:</p>
-            <p>01/01/2000</p>
-
-            <p class="info-field">Membro desde:</p>
-            <p>29 Setembro 2019</p>
+            <p><strong>Email:</strong> usuario@email.com</p>
+            <p><strong>CPF:</strong> 000.000.000-00</p>
+            <p><strong>Data de Nascimento:</strong> 01/01/2000</p>
         </div>
 
+        <!-- Seção de reservas -->
         <div class="booking-section">
-            <h3>Passeios e Reservas Disponíveis</h3>
-
-            <div class="booking-item">
-                <h4>Passeio pela Praia</h4>
-                <p>Data: 15/11/2024</p>
-                <p>Horário: 10h00</p>
-                <p>Local: Praia do Futuro</p>
-            </div>
-
-            <div class="booking-item">
-                <h4>Visita ao Museu</h4>
-                <p>Data: 20/11/2024</p>
-                <p>Horário: 14h00</p>
-                <p>Local: Museu do Ceará</p>
-            </div>
-
-            <div class="booking-item">
-                <h4>Trilha na Serra</h4>
-                <p>Data: 22/11/2024</p>
-                <p>Horário: 8h00</p>
-                <p>Local: Serra de Baturité</p>
-            </div>
+            <h3>Tabela de Reservas e Passeios</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Passeio</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="reservas-body">
+                    <tr>
+                        <td>1</td>
+                        <td>Passeio nas Dunas</td>
+                        <td>2024-12-10</td>
+                        <td>10:00</td>
+                        <td style="color: green;">Confirmado</td>
+                        <td>
+                            <button class="btn cancel">CANCELAR</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Praia de Jericoacoara</td>
+                        <td>2024-12-15</td>
+                        <td>08:00</td>
+                        <td style="color: green;">Confirmado</td>
+                        <td>
+                            <button class="btn cancel">CANCELAR</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
+    <script>
+        // Função para manipular o botão CANCELAR com confirmação
+        document.querySelectorAll('.btn.cancel').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const row = event.target.closest('tr');
+                const passeio = row.querySelector('td:nth-child(2)').textContent;
+                const confirmar = confirm(`Tem certeza que deseja cancelar o passeio "${passeio}"?`);
+                
+                if (confirmar) {
+                    row.remove();
+                    alert(`O passeio "${passeio}" foi cancelado com sucesso!`);
+                }
+            });
+        });
+
+        // Função para o botão SAIR
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            const confirmLogout = confirm('Tem certeza que deseja sair?');
+            if (confirmLogout) {
+                window.location.href = "index.html";
+            }
+        });
+    </script>
 </body>
 </html>
