@@ -1,0 +1,98 @@
+<!-- Header -->
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+      <div class="row justify-content-center py-5">
+        <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+          <h1 class="display-3 text-white animated slideInDown">Confirmação de Pedido</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Confirmation Section -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center">
+        <h6 class="section-title bg-white text-center text-primary px-3">Pedido Confirmado</h6>
+        <h1 class="mb-5">Pedido #{{detalhes.numeroPedido}}</h1>
+      </div>
+  
+      <div class="row g-4">
+        <!-- Detalhes do Passeio -->
+        <div class="col-lg-12">
+          <div class="order-card p-4 mb-4">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <img src="assets/img/Cumbuco.jpg" alt="Praia do Cumbuco" class="img-fluid rounded">
+              </div>
+              <div class="col-md-8">
+                <h3>Passeio Praia do Cumbuco</h3>
+                <p class="text-muted mb-2">Data do Passeio: {{detalhes.dataPasseio}}</p>
+                <p class="mb-0"><i class="fa fa-clock text-primary me-2"></i>Duração: {{detalhes.duracao}}</p>
+                <p class="mb-0"><i class="fa fa-map-marker-alt text-primary me-2"></i>Saída: {{detalhes.localSaida}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Detalhes da Reserva -->
+        <div class="col-lg-6">
+          <div class="order-card p-4 h-100">
+            <h4 class="mb-4">Detalhes da Reserva</h4>
+            <div class="d-flex justify-content-between mb-3">
+              <span>Adultos ({{detalhes.adultos}}x)</span>
+              <span>R$ {{detalhes.valorAdultos.toFixed(2)}}</span>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+              <span>Taxa de serviço</span>
+              <span>R$ {{detalhes.taxaServico.toFixed(2)}}</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between fw-bold">
+              <span>Total</span>
+              <span class="text-primary">R$ {{detalhes.total.toFixed(2)}}</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Cronograma -->
+        <div class="col-lg-6">
+          <div class="order-card p-4 h-100">
+            <h4 class="mb-4">Cronograma do Dia</h4>
+            <div class="timeline">
+              <div class="timeline-item" *ngFor="let item of cronograma">
+                <h6>{{item.horario}} - {{item.titulo}}</h6>
+                <p class="mb-0">{{item.descricao}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Informações Importantes -->
+        <div class="col-lg-12">
+          <div class="order-card p-4">
+            <h4 class="mb-4">Informações Importantes</h4>
+            <div class="row g-4">
+              <div class="col-md-3" *ngFor="let info of infoCards">
+                <div class="text-center">
+                  <i class="fa {{info.icon}} fa-3x text-primary mb-3"></i>
+                  <h6>{{info.titulo}}</h6>
+                  <p class="mb-0">{{info.descricao}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Botões -->
+        <div class="col-12 text-center">
+          <button class="btn btn-primary py-3 px-5" (click)="imprimirComprovante()">
+            <i class="fa fa-print me-2"></i>Imprimir Comprovante
+          </button>
+          <a [routerLink]="['/']" class="btn btn-outline-primary py-3 px-5 ms-3">
+            <i class="fa fa-home me-2"></i>Voltar ao Início
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>

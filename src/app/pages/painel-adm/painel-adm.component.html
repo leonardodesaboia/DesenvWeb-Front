@@ -1,0 +1,153 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <span class="navbar-brand mx-auto text-warning fw-bold text-center" style="font-size: 2rem;">
+        Bem-vindo ao Painel Administrativo
+      </span>
+      <button (click)="logout()" id="logout-btn" class="btn btn-warning btn-sm text-dark fw-bold">Sair</button>
+    </div>
+  </nav>
+  
+  <!-- Seção de Visualizar Reservas -->
+  <section id="reservas" class="container py-5">
+    <h2 class="text-primary mb-4">Reservas</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th>#</th>
+            <th>Nome do Cliente</th>
+            <th>Passeio</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reserva of reservas">
+            <td>{{reserva.id}}</td>
+            <td>{{reserva.nomeCliente}}</td>
+            <td>{{reserva.passeio}}</td>
+            <td>{{reserva.data}}</td>
+            <td>{{reserva.horario}}</td>
+            <td>{{reserva.status}}</td>
+            <td>
+              <button class="btn btn-sm btn-success me-1" 
+                      (click)="atualizarStatusReserva(reserva.id, 'confirmado')">
+                Confirmar
+              </button>
+              <button class="btn btn-sm btn-danger" 
+                      (click)="atualizarStatusReserva(reserva.id, 'cancelado')">
+                Cancelar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+  <!-- Seção de Criar Passeio -->
+  <section id="criar-passeio" class="container py-5">
+    <div class="row">
+      <div class="col-lg-6">
+        <form [formGroup]="passeioForm" (ngSubmit)="onSubmit()" class="shadow-lg p-4 rounded-lg bg-white">
+          <h3 class="text-primary mb-4">Criar Passeio</h3>
+  
+          <div class="mb-3">
+            <label for="tour-name" class="form-label">Nome do Passeio</label>
+            <input type="text" 
+                   id="tour-name" 
+                   formControlName="nome" 
+                   class="form-control" 
+                   placeholder="Ex: Passeio nas Dunas">
+          </div>
+  
+          <div class="mb-3">
+            <label for="tour-description" class="form-label">Descrição</label>
+            <textarea id="tour-description" 
+                      formControlName="descricao" 
+                      class="form-control" 
+                      rows="3" 
+                      placeholder="Descreva o passeio"></textarea>
+          </div>
+  
+          <div class="mb-3">
+            <label for="tour-price" class="form-label">Preço por Pessoa (R$)</label>
+            <input type="number" 
+                   id="tour-price" 
+                   formControlName="preco" 
+                   class="form-control" 
+                   placeholder="Ex: 250.00">
+          </div>
+  
+          <div class="mb-3">
+            <label for="tour-capacity" class="form-label">Número Máximo de Pessoas</label>
+            <input type="number" 
+                   id="tour-capacity" 
+                   formControlName="capacidade" 
+                   class="form-control" 
+                   placeholder="Ex: 10">
+          </div>
+  
+          <div class="mb-3">
+            <label for="tour-location" class="form-label">Localização</label>
+            <input type="text" 
+                   id="tour-location" 
+                   formControlName="localizacao" 
+                   class="form-control" 
+                   placeholder="Digite um endereço">
+          </div>
+  
+          <div class="mb-3">
+            <label for="tour-date" class="form-label">Data</label>
+            <input type="date" 
+                   id="tour-date" 
+                   formControlName="data" 
+                   class="form-control">
+          </div>
+  
+          <div class="mb-3">
+            <label for="tour-time" class="form-label">Horário</label>
+            <input type="time" 
+                   id="tour-time" 
+                   formControlName="horario" 
+                   class="form-control">
+          </div>
+  
+          <div class="mb-3">
+            <label for="tour-images" class="form-label">Imagens do Passeio</label>
+            <input type="file" 
+                   id="tour-images" 
+                   (change)="onFileChange($event)" 
+                   class="form-control" 
+                   accept="image/*" 
+                   multiple>
+            <small class="form-text text-muted">Você pode adicionar várias imagens.</small>
+          </div>
+  
+          <button type="submit" 
+                  class="btn btn-primary w-100 py-2" 
+                  [disabled]="!passeioForm.valid">
+            Criar Passeio
+          </button>
+        </form>
+      </div>
+  
+      <!-- Pré-visualização -->
+      <div class="col-lg-6" *ngIf="previewData">
+        <div class="bg-light rounded-lg shadow-lg p-4">
+          <h4 class="text-primary mb-4">Pré-visualização do Passeio</h4>
+          <div class="d-flex flex-column gap-3">
+            <h5>{{previewData.nome}}</h5>
+            <p>{{previewData.descricao}}</p>
+            <p>Preço: R$ {{previewData.preco}}</p>
+            <p>Capacidade: {{previewData.capacidade}} pessoas</p>
+            <p>Local: {{previewData.localizacao}}</p>
+            <p>Data: {{previewData.data | date}}</p>
+            <p>Horário: {{previewData.horario}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

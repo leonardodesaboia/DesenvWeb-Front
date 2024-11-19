@@ -1,0 +1,44 @@
+<nav class="navbar">
+    <span class="navbar-brand">Bem-vindo ao seu Perfil</span>
+    <button id="logout-btn" class="btn btn-warning" (click)="logout()">Sair</button>
+</nav>
+
+<div class="container">
+    <!-- Cartão de perfil do usuário -->
+    <div class="profile-card">
+        <img [src]="usuario.foto" alt="Foto do usuário">
+        <h2>{{usuario.nome}}</h2>
+        <p><strong>Email:</strong> {{usuario.email}}</p>
+        <p><strong>CPF:</strong> {{usuario.cpf}}</p>
+        <p><strong>Data de Nascimento:</strong> {{usuario.dataNascimento}}</p>
+    </div>
+
+    <!-- Seção de reservas -->
+    <div class="booking-section">
+        <h3>Tabela de Reservas e Passeios</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Passeio</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reserva of reservas">
+                    <td>{{reserva.id}}</td>
+                    <td>{{reserva.passeio}}</td>
+                    <td>{{reserva.data}}</td>
+                    <td>{{reserva.horario}}</td>
+                    <td style="color: green;">{{reserva.status}}</td>
+                    <td>
+                        <button class="btn cancel" (click)="cancelarReserva(reserva)">CANCELAR</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

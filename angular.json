@@ -27,9 +27,31 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
+              "src/assets/css/style.css"
             ],
-            "scripts": [],
+            "scripts": [              
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/assets/lib/wow/wow.min.js",
+              "src/assets/lib/easing/easing.min.js",
+              "src/assets/lib/waypoints/waypoints.min.js",
+              "src/assets/lib/owlcarousel/owl.carousel.min.js",
+              "src/assets/lib/tempusdominus/js/moment.min.js",
+              "src/assets/lib/tempusdominus/js/moment-timezone.min.js",
+              "src/assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js",
+              "src/assets/js/main.js",  
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/wow.js/dist/wow.min.js",
+              "node_modules/owl.carousel/dist/owl.carousel.min.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -55,7 +77,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -84,6 +112,8 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
+              "src/favicon.ico",
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -97,5 +127,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a301cb4f-5eac-4abf-8d83-be5de409ca08"
   }
 }

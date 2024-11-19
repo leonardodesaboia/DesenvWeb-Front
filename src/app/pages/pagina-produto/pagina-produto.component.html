@@ -1,0 +1,111 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow sticky-top bg-white px-4 px-lg-5 py-3 py-lg-0">
+    <!-- Navbar content -->
+    <a [routerLink]="['/']" class="navbar-brand p-0">
+      <img src="assets/img/logo.png" alt="Logo" class="img-fluid">
+    </a>
+    <!-- Rest of navbar -->
+  </nav>
+  
+  <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+      <div class="row justify-content-center py-5">
+        <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+          <h1 class="display-3 text-white animated slideInDown">Praia do Cumbuco</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- About Section -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Gallery Section -->
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <ng-container *ngFor="let image of galleryImages; let i = index">
+              <div [class]="i % 2 === 0 ? 'col-6 text-end' : 'col-6'">
+                <img [src]="image.url" [alt]="image.alt" class="img-fluid rounded w-100 h-100">
+              </div>
+            </ng-container>
+          </div>
+        </div>
+  
+        <!-- Booking Section -->
+        <div class="col-lg-6">
+          <!-- About content -->
+          <h6 class="section-title bg-white text-start text-primary pe-3">Sobre o Destino</h6>
+          <h1 class="mb-4">Bem-vindo ao Paraíso do <span class="text-primary">Cumbuco</span></h1>
+          <!-- Info icons -->
+          <div class="row g-3 pb-4">
+            <!-- Info boxes here -->
+          </div>
+  
+          <!-- Booking Form -->
+          <div class="col-12 mt-4">
+            <div class="card shadow-sm">
+              <div class="card-header bg-white">
+                <h5 class="mb-0">Reserva do Passeio</h5>
+              </div>
+              <div class="card-body">
+                <!-- Passengers Selection -->
+                <div class="mb-4">
+                  <label class="form-label fw-bold">Passageiros</label>
+                  <div class="d-flex align-items-center gap-3 mb-3 p-3 bg-light rounded">
+                    <div>
+                      <p class="mb-0">Adultos</p>
+                      <small class="text-muted">R$ {{adultPrice}},00 por pessoa</small>
+                    </div>
+                    <div class="input-group" style="width: 150px;">
+                      <button class="btn btn-outline-secondary" type="button" (click)="decrementAdults()">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <input type="number" class="form-control text-center" [(ngModel)]="adultsCount" min="1" max="8" readonly>
+                      <button class="btn btn-outline-secondary" type="button" (click)="incrementAdults()">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- Time Selection -->
+                <div class="mb-4">
+                  <label class="form-label fw-bold">Horário do Passeio</label>
+                  <div class="row g-2">
+                    <div class="col-md-3 col-6" *ngFor="let time of availableTimes">
+                      <input type="radio" class="btn-check" name="tourTime" [id]="'time'+time.value" 
+                             [value]="time.value" [(ngModel)]="selectedTime">
+                      <label class="btn btn-outline-primary w-100" [for]="'time'+time.value">
+                        {{time.label}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- Total and Book Button -->
+                <div class="border-top pt-4">
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <span class="h5 mb-0 fw-bold">Total:</span>
+                    <span class="h4 mb-0 fw-bold">R$ {{totalPrice.toFixed(2)}}</span>
+                  </div>
+                  <button class="btn btn-primary w-100 py-3" (click)="bookTour()">
+                    Reservar Agora
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Services Section -->
+  <div class="container-xxl py-5">
+    <!-- Services content -->
+  </div>
+  
+  <!-- Footer -->
+  <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn">
+    <!-- Footer content -->
+  </div>

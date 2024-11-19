@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "poppins", sans-serif;
+    text-decoration: none;
+  }
+  
+  section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background: url(/img/Background.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .form-box {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    height: 450px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .inputbox {
+    position: relative;
+    margin: 10px 0;
+    width: 310px;
+    border-bottom: 2px solid #fff;
+  }
+  
+  .inputbox label {
+    position: absolute;
+    top: 80%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1em;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+  .inputbox input:focus ~ label,
+  .inputbox input:valid ~ label {
+    top: 35px;
+  }
+  
+  .inputbox input {
+    width: 100%;
+    height: 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 50px 35px 0px 5px;
+    color: #fff;
+    margin: 4px;
+  }
+  
+  .inputbox ion-icon {
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    top: 20px;
+  }
+  
+  .forget {
+    width: 40%;
+    font-size: 0.9em;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  #forgot-password:hover {
+    text-decoration: underline;
+  }
+  
+  #button-create-account {
+    background-color: rgb(51, 187, 232);
+    transition: 0.2s;
+    color: rgb(0, 0, 0);
+    margin-top: 30px;
+  }
+  
+  #button-create-account:hover {
+    background-color: rgb(101, 203, 236);
+  }
+  
+  #button-entrance {
+    background-color: rgb(101, 207, 105);
+    transition: 0.2s;
+    color: rgb(0, 0, 0);
+  }
+  
+  #button-entrance:hover {
+    background-color: rgb(142, 224, 142);
+  }
+  
+  .forget a {
+    color: #fff;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  
+  .forget label a:hover {
+    text-decoration: underline;
+  }
+  
+  button {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 40px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .form-box {
+      height: auto;
+      width: 75%;
+    }
+  
+    h2 {
+      font-size: 1.5em;
+    }
+  
+    .inputbox {
+      width: 100%;
+    }
+  }
+  
