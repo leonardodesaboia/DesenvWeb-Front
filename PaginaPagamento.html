@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -127,7 +129,8 @@
             <h6 class="section-title bg-white text-center text-primary px-3">Pagamento</h6>
             <h1 class="mb-5">Finalizar Reserva</h1>
         </div>
-
+<!--Rascunho 12/11 se não quiser passar os valores do resumo de compra do PaginaProduto.html para o PaginaPagamento.html como adultos, preço, e horário é só pegar as linhas de código no seu bloco de notas!
+Aí você substitui esse resumo da compra pelo bloco de nota e tirar o script da linha 234(agora 236) até o fim-->
         <div class="row g-4 justify-content-center">
             <!-- Resumo da Compra -->
             <div class="col-lg-4">
@@ -155,7 +158,7 @@
                     <h4 class="mb-4">Pagamento via PIX</h4>
                     
                     <div class="qr-code-container text-center mb-4">
-                        <img src="/img/pix.png" alt="QR Code PIX" class="mb-3">
+                        <img src="img/pix.png" alt="QR Code PIX" class="mb-3">
                         <div class="mt-3">
                             <p class="mb-2">Código PIX</p>
                             <div class="input-group mb-3">
@@ -226,6 +229,19 @@
         // Por enquanto, apenas simularemos uma confirmação
         alert('Pagamento confirmado com sucesso! Você receberá um e-mail com os detalhes da sua reserva.');
         // Redirecionar para página de confirmação ou home
-        // window.location.href = 'confirmacao.html';
+        window.location.href = 'ResumoPedido.html';
     }
 </script>
+
+<script>
+    // Recupera os dados do localStorage
+    const adultsCount = localStorage.getItem('adultsCount');
+    const selectedTime = localStorage.getItem('selectedTime');
+    const totalPrice = localStorage.getItem('totalPrice');
+    
+    // Preenche os campos de resumo com os dados armazenados
+    document.getElementById('summary-adults').textContent = adultsCount;
+    document.getElementById('summary-adults-price').textContent = `R$ ${totalPrice}`;
+    document.getElementById('summary-time').textContent = selectedTime;
+    document.getElementById('summary-total').textContent = `R$ ${totalPrice}`;
+    </script>
