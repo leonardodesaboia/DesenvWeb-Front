@@ -147,16 +147,16 @@
 
 <body>
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow sticky-top bg-white px-4 px-lg-5 py-3 py-lg-0">
-        <a href="" class="navbar-brand p-0">
-            <img src="img/logo.png" alt="Logo" class="img-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+        <a href="/index.html" class="navbar-brand p-0">
+            <img id="logo" src="img/logo.png" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="#home" class="nav-item nav-link active">Home</a>
                 <a href="#about" class="nav-item nav-link">Sobre</a>
                 <a href="#services" class="nav-item nav-link">Serviços</a>
                 <a href="#packages" class="nav-item nav-link">Promoções</a>
@@ -164,15 +164,15 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Destinos</a>
                     <div class="dropdown-menu m-0">
-                        <a href="PaginaProduto.html" class="dropdown-item">Cumbuco</a>
-                        <a href="jericoacoara.html" class="dropdown-item">Jericoacoara</a>
-                        <a href="praia-futuro.html" class="dropdown-item">Praia do Futuro</a>
-                        <a href="morro-branco.html" class="dropdown-item">Morro Branco</a>
+                        <a href="/PaginaProduto.html" class="dropdown-item">Cumbuco</a>
+                        <a href="#booking" class="dropdown-item">Jericoacoara</a>
+                        <a href="#team" class="dropdown-item">Praia do Futuro</a>
+                        <a href="#testimonial" class="dropdown-item">Morro Branco</a>
                     </div>
                 </div>
             </div>
-            <a href="login.html" class="btn btn-primary rounded-pill py-2 px-4 ms-3">Registrar</a>
-            <a href="loginADM.html" class="btn btn-warning rounded-pill py-2 px-4 ms-3">Administrador</a> 
+            <a href="Login.html" class="btn btn-primary rounded-pill py-2 px-4">Registrar</a>
+            <a href="loginADM.html" class="btn btn-warning rounded-pill py-2 px-4 ms-3">Administrador</a>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -207,8 +207,8 @@
                             </div>
                             <div class="col-md-8">
                                 <h3>Passeio Praia do Cumbuco</h3>
-                                <p class="text-muted mb-2">Data do Passeio: 15/05/2024</p>
-                                <p class="mb-0"><i class="fa fa-clock text-primary me-2"></i>Duração: 8 horas (08:00 - 17:00)</p>
+                                <p class="text-muted mb-2" data-tour-date>Data do Passeio: Carregando...</p>
+                                <p class="mb-0"><i class="fa fa-clock text-primary me-2"></i>Duração: 9 horas (08:00 - 17:00)</p>
                                 <p class="mb-0"><i class="fa fa-map-marker-alt text-primary me-2"></i>Saída: Hotel Marina Park</p>
                             </div>
                         </div>
@@ -220,17 +220,13 @@
                     <div class="order-card p-4 h-100">
                         <h4 class="mb-4">Detalhes da Reserva</h4>
                         <div class="d-flex justify-content-between mb-3">
-                            <span>Adultos (2x)</span>
-                            <span>R$ 360,00</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>Taxa de serviço</span>
-                            <span>R$ 45,00</span>
+                            <span>Carregando detalhes...</span>
+                            <span>R$ 0.00</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between fw-bold">
                             <span>Total</span>
-                            <span class="text-primary">R$ 405,00</span>
+                            <span class="text-primary">Carregando...</span>
                         </div>
                     </div>
                 </div>
@@ -377,6 +373,41 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3."></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Recupera os dados do localStorage
+            const adultsCount = localStorage.getItem('adultsCount');
+            const selectedDate = localStorage.getItem('selectedDate');
+            const totalPrice = localStorage.getItem('totalPrice');
+        
+            document.querySelector('[data-tour-date]').textContent = `Data do Passeio: ${selectedDate}`;
+        
+            const reservaDetalhes = document.querySelector('.order-card .d-flex.justify-content-between.mb-3');
+            if (reservaDetalhes) {
+                reservaDetalhes.innerHTML = `
+                    <span>Adultos (${adultsCount}x)</span>
+                    <span>R$ ${totalPrice}</span>
+                `;
+            }
+        
+            const totalElement = document.querySelector('.d-flex.justify-content-between.fw-bold .text-primary');
+            if (totalElement) {
+                totalElement.textContent = `R$ ${totalPrice}`;
+            }
+        
+
+            const orderNumber = 'BM' + new Date().getFullYear() + Math.floor(Math.random() * 100000);
+            const orderTitle = document.querySelector('.mb-5');
+            if (orderTitle) {
+                orderTitle.textContent = `Pedido #${orderNumber}`;
+            }
+        
+            localStorage.clear();
+        });
+        </script>
+
+        <script src="js/authNavbar.js"></script>
     </body>
 
 </html>
