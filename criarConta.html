@@ -13,40 +13,38 @@
   <section>
     <div class="form-box">
       <div class="form-value">
-        <form id="loginForm">
+        <form id="registerForm">
           <h2>Formulário</h2>
           <div class="inputbox">
-            <input type="text" id="cpf" name="cpf" >
-            <label for="cpf">Nome completo</label>
+            <input type="text" id="nomeCompleto" name="nomeCompleto">
+            <label for="nomeCompleto">Nome completo</label>
           </div>
           <div class="inputbox">
-            <input type="email" id="email" name="email" >
-            <label for="email">Email</label>
+            <input type="email" id="registerEmail" name="email">
+            <label for="registerEmail">Email</label>
           </div>
           <div class="inputbox">
-            <input type="text" id="cpf" name="cpf" >
+            <input type="text" id="cpf" name="cpf">
             <label for="cpf">CPF</label>
           </div>
           <div class="inputbox">
-            <input type="date" id="data-nascimento" name="data-nascimento" >
-            <label for="data-nascimento">Data de Nascimento</label>
+            <input type="date" id="dataNascimento" name="dataNascimento">
+            <label for="dataNascimento">Data de Nascimento</label>
           </div>
-<!--telefone-->
           <div class="inputbox">
-            <input type="password" id="password" name="password" >
-            <label for="password">Senha</label>
+            <input type="password" id="registerPassword" name="password">
+            <label for="registerPassword">Senha</label>
           </div>
-          <button id="button-create-account"><a href="/index.html" style="color: black;">Criar conta</a></button>
+          <button type="submit" id="button-create-account">Criar conta</button>
         </form>
+        <p id="registerResponse"></p>
       </div>
     </div>
   </section>
 
   <script>
-
-        function formatarTelefone(input) {
+    function formatarTelefone(input) {
       let telefone = input.value;
-      
       telefone = telefone.replace(/\D/g, '');
 
       if (telefone.length <= 10) {
@@ -58,6 +56,27 @@
       input.value = telefone;
     }
   </script>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+
+      fetch('http://localhost:8080/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email, senha: password })
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('registerResponse').innerText = data;
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
+
 </body>
 
 </html>

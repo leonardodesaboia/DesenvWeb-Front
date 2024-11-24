@@ -8,36 +8,64 @@
   <link rel="stylesheet" href="login.css">
 </head>
 <body>
+    
   <section>
     <div class="form-box">
       <div class="form-value">
         <form id="loginForm">
           <h2>Formulário</h2>
           <div class="inputbox">
-            <input type="text" id="username" name="username" >
-            <label for="username">Usuário</label>
+            <input type="text" id="loginEmail" name="username">
+            <label for="loginEmail">Usuário</label>
           </div>
           <div class="inputbox">
-            <input type="password" id="senha" name="senha" >
-            <label for="senha">Senha</label>
+            <input type="password" id="loginPassword" name="senha">
+            <label for="loginPassword">Senha</label>
           </div>
           <div class="forget">
             <a href="./ForgotPassword.html" id="forgot-password">Esqueci a senha</a>
           </div>
-          <button onclick="trocarTelaHome()" id="button-entrance"><a href="/index.html" style="color: black;">Entrar</a></button>
-          <button onclick="trocarTela()" id="button-create-account"><a href="/criarConta.html" style="color: black">Criar conta</a></button>
+          <button type="submit" id="button-entrance">Entrar</button>
+          <button type="button" onclick="trocarTela()" id="button-create-account">Criar conta</button>
         </form>
+        <p id="loginResponse"></p>
       </div>
     </div>
   </section>
 
   <script>
     function trocarTelaHome() {
-    window.location.href = "http://127.0.0.1:5500/index.html";
-  }
+        
+      window.location.href = "http://127.0.0.1:5500/index.html";
+    }
     function trocarTela() {
-    window.location.href = "http://127.0.0.1:5500/criarConta.html";
-  }
+      window.location.href = "http://127.0.0.1:5500/criarConta.html";
+    }
+  </script>
+  <script>
+    
+    document.getElementById('loginForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      console.log(email);
+      const password = document.getElementById('loginPassword').value;
+
+      fetch('http://localhost:8080/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset= utf-8'
+        },
+
+        body: JSON.stringify({ "email": `${email}`, "senha": `${password}` })
+      })
+      .then(response => response.json())
+      .then(data => {
+        localStorage.setItem('loginResponse', JSON.stringify(data));
+        trocarTelaHome();
+      })
+      
+      .catch(error => console.error('Error:', error));
+    });
   </script>
 </body>
 </html>
