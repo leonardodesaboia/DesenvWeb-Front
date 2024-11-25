@@ -56,25 +56,32 @@
       input.value = telefone;
     }
   </script>
-  <script>
+  <script type = "module">
+    import { authService } from './js/api.js'
     document.getElementById('registerForm').addEventListener('submit', (event) => {
       event.preventDefault();
+      const nome = document.getElementById('nomeCompleto').value;
       const email = document.getElementById('registerEmail').value;
-      const password = document.getElementById('registerPassword').value;
-
-      fetch('http://localhost:8080/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: email, senha: password })
-      })
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('registerResponse').innerText = data;
-      })
-      .catch(error => console.error('Error:', error));
+      const senha = document.getElementById('registerPassword').value;
+      const dataNascimento = document.getElementById('dataNascimento').value;
+      const cpf = document.getElementById('cpf').value;
+      const role = 'CLIENTE';
+      const newUserDTO = {
+        nome: nome,
+        email: email,
+        senha: senha,
+        dataNascimento: dataNascimento,
+        cpf: cpf,
+        role: role
+      }
+      try{
+        const data = authService.register(newUserDTO);
+      }
+      catch{
+        console.log('Erro ao criar conta');
+      }
     });
+
   </script>
 
 </body>
