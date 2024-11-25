@@ -40,28 +40,20 @@
       window.location.href = "http://127.0.0.1:5500/criarConta.html";
     }
   </script>
-  <script>
-    
+  <script type="module">
+    import { authService } from './js/api.js';
     document.getElementById('loginForm').addEventListener('submit', (event) => {
       event.preventDefault();
       const email = document.getElementById('loginEmail').value;
       console.log(email);
-      const password = document.getElementById('loginPassword').value;
+      const senha = document.getElementById('loginPassword').value;
 
-      fetch('http://localhost:8080/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset= utf-8'
-        },
-        body: JSON.stringify({ "email": `${email}`, "senha": `${password}` })
-      })
-      .then(response => response.json())
-      .then(data => {
-        localStorage.setItem('loginResponse', JSON.stringify(data));
-        trocarTelaHome();
-      })
-      
-      .catch(error => console.error('Error:', error));
+      try{
+        const data =authService.login({email, senha});
+      }
+      catch{
+        console.log('Erro ao fazer login');
+      }
     });
   </script>
 </body>

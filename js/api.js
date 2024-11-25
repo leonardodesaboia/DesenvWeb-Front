@@ -12,7 +12,7 @@ const getHeaders = () => {
 // Serviço de Autenticação
 export const authService = {
     async login(credentials) {
-        const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        const response = await fetch(`${API_BASE_URL}/user/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(credentials)
@@ -22,12 +22,13 @@ export const authService = {
             throw new Error(error.message || 'Erro no login');
         }
         const data = await response.json();
+        localStorage.setItem('name', data.name);
         localStorage.setItem('token', data.token);
         return data;
     },
 
     async register(userData) {
-        const response = await fetch(`${API_BASE_URL}/users`, {
+        const response = await fetch(`${API_BASE_URL}/user`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
@@ -47,7 +48,7 @@ export const authService = {
 // Serviço de Passeios
 export const passeioService = {
     async listarTodos() {
-        const response = await fetch(`${API_BASE_URL}/passeios`, {
+        const response = await fetch(`${API_BASE_URL}/passeio`, {
             headers: getHeaders()
         });
         if (!response.ok) throw new Error('Erro ao buscar passeios');
@@ -55,7 +56,7 @@ export const passeioService = {
     },
 
     async criar(passeioData) {
-        const response = await fetch(`${API_BASE_URL}/passeios`, {
+        const response = await fetch(`${API_BASE_URL}/passeio`, {
             method: 'POST',
             headers: getHeaders(),
             body: JSON.stringify(passeioData)
@@ -65,7 +66,7 @@ export const passeioService = {
     },
 
     async atualizar(id, passeioData) {
-        const response = await fetch(`${API_BASE_URL}/passeios/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/passeio/${id}`, {
             method: 'PUT',
             headers: getHeaders(),
             body: JSON.stringify(passeioData)
@@ -87,7 +88,7 @@ export const passeioService = {
 // Serviço de Reservas
 export const reservaService = {
     async criar(reservaData) {
-        const response = await fetch(`${API_BASE_URL}/reservas`, {
+        const response = await fetch(`${API_BASE_URL}/reserva`, {
             method: 'POST',
             headers: getHeaders(),
             body: JSON.stringify(reservaData)
@@ -96,16 +97,9 @@ export const reservaService = {
         return response.json();
     },
 
-    async listarPorUsuario() {
-        const response = await fetch(`${API_BASE_URL}/reservas/usuario`, {
-            headers: getHeaders()
-        });
-        if (!response.ok) throw new Error('Erro ao buscar reservas');
-        return response.json();
-    },
 
-    async atualizarStatus(id, status) {
-        const response = await fetch(`${API_BASE_URL}/reservas/${id}/status`, {
+    async confirmarReserva(id) {
+        const response = await fetch(`${API_BASE_URL}/reserva/confirmar/${id}`, {
             method: 'PUT',
             headers: getHeaders(),
             body: JSON.stringify({ status })
