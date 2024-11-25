@@ -1,0 +1,83 @@
+.payment-section {
+    font-family: 'Nunito', sans-serif;
+}
+
+.payment-section .section-title {
+    position: relative;
+    display: inline-block;
+}
+
+.payment-section .section-title::before {
+    position: absolute;
+    content: "";
+    width: 45px;
+    height: 2px;
+    top: 50%;
+    left: -55px;
+    margin-top: -1px;
+    background: var(--primary);
+}
+
+.payment-section .section-title::after {
+    position: absolute;
+    content: "";
+    width: 45px;
+    height: 2px;
+    top: 50%;
+    right: -55px;
+    margin-top: -1px;
+    background: var(--primary);
+}
+
+.qr-code-container {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.pix-steps {
+    counter-reset: step;
+}
+
+.pix-steps li {
+    counter-increment: step;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.pix-steps li::before {
+    content: counter(step);
+    background: var(--primary);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.payment-info {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.copy-button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.copy-button:hover {
+    opacity: 0.9;
+}

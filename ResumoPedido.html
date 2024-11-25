@@ -37,126 +37,21 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
-    <style>
-        :root {
-            --primary: #1a237e;
-            --secondary: #ffc107;
-            --light: #F5F5F5;
-            --dark: #14141F;
-        }
-
-        .hero-header {
-            background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)), url('img/Cumbuco2.jpg');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .navbar-light .navbar-nav .nav-link {
-            font-family: 'Nunito', sans-serif;
-            position: relative;
-            margin-right: 25px;
-            padding: 35px 0;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--dark);
-            outline: none;
-            transition: .5s;
-        }
-
-        .section-title {
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::before {
-            position: absolute;
-            content: "";
-            width: 45px;
-            height: 2px;
-            top: 50%;
-            left: -55px;
-            margin-top: -1px;
-            background: var(--primary);
-        }
-
-        .section-title::after {
-            position: absolute;
-            content: "";
-            width: 45px;
-            height: 2px;
-            top: 50%;
-            right: -55px;
-            margin-top: -1px;
-            background: var(--primary);
-        }
-
-        .text-primary {
-            color: var(--primary) !important;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            color: #000;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--secondary);
-            border-color: var(--secondary);
-        }
-
-        .order-card {
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 20px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--primary);
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 20px;
-            bottom: -15px;
-            width: 2px;
-            background: var(--primary);
-        }
-
-        .timeline-item:last-child::after {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="ResumoPedido.css">
 </head>
 
 <body>
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow sticky-top bg-white px-4 px-lg-5 py-3 py-lg-0">
-        <a href="" class="navbar-brand p-0">
-            <img src="img/logo.png" alt="Logo" class="img-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+        <a href="/index.html" class="navbar-brand p-0">
+            <img id="logo" src="img/logo.png" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="#home" class="nav-item nav-link active">Home</a>
                 <a href="#about" class="nav-item nav-link">Sobre</a>
                 <a href="#services" class="nav-item nav-link">Serviços</a>
                 <a href="#packages" class="nav-item nav-link">Promoções</a>
@@ -164,15 +59,15 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Destinos</a>
                     <div class="dropdown-menu m-0">
-                        <a href="PaginaProduto.html" class="dropdown-item">Cumbuco</a>
-                        <a href="jericoacoara.html" class="dropdown-item">Jericoacoara</a>
-                        <a href="praia-futuro.html" class="dropdown-item">Praia do Futuro</a>
-                        <a href="morro-branco.html" class="dropdown-item">Morro Branco</a>
+                        <a href="/PaginaProduto.html" class="dropdown-item">Cumbuco</a>
+                        <a href="#booking" class="dropdown-item">Jericoacoara</a>
+                        <a href="#team" class="dropdown-item">Praia do Futuro</a>
+                        <a href="#testimonial" class="dropdown-item">Morro Branco</a>
                     </div>
                 </div>
             </div>
-            <a href="login.html" class="btn btn-primary rounded-pill py-2 px-4 ms-3">Registrar</a>
-            <a href="loginADM.html" class="btn btn-warning rounded-pill py-2 px-4 ms-3">Administrador</a> 
+            <a href="Login.html" class="btn btn-primary rounded-pill py-2 px-4">Registrar</a>
+            <a href="loginADM.html" class="btn btn-warning rounded-pill py-2 px-4 ms-3">Administrador</a>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -207,8 +102,8 @@
                             </div>
                             <div class="col-md-8">
                                 <h3>Passeio Praia do Cumbuco</h3>
-                                <p class="text-muted mb-2">Data do Passeio: 15/05/2024</p>
-                                <p class="mb-0"><i class="fa fa-clock text-primary me-2"></i>Duração: 8 horas (08:00 - 17:00)</p>
+                                <p class="text-muted mb-2" data-tour-date>Data do Passeio: Carregando...</p>
+                                <p class="mb-0"><i class="fa fa-clock text-primary me-2"></i>Duração: 9 horas (08:00 - 17:00)</p>
                                 <p class="mb-0"><i class="fa fa-map-marker-alt text-primary me-2"></i>Saída: Hotel Marina Park</p>
                             </div>
                         </div>
@@ -220,17 +115,13 @@
                     <div class="order-card p-4 h-100">
                         <h4 class="mb-4">Detalhes da Reserva</h4>
                         <div class="d-flex justify-content-between mb-3">
-                            <span>Adultos (2x)</span>
-                            <span>R$ 360,00</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>Taxa de serviço</span>
-                            <span>R$ 45,00</span>
+                            <span>Carregando detalhes...</span>
+                            <span>R$ 0.00</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between fw-bold">
                             <span>Total</span>
-                            <span class="text-primary">R$ 405,00</span>
+                            <span class="text-primary">Carregando...</span>
                         </div>
                     </div>
                 </div>
@@ -377,6 +268,41 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3."></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Recupera os dados do localStorage
+            const adultsCount = localStorage.getItem('adultsCount');
+            const selectedDate = localStorage.getItem('selectedDate');
+            const totalPrice = localStorage.getItem('totalPrice');
+        
+            document.querySelector('[data-tour-date]').textContent = `Data do Passeio: ${selectedDate}`;
+        
+            const reservaDetalhes = document.querySelector('.order-card .d-flex.justify-content-between.mb-3');
+            if (reservaDetalhes) {
+                reservaDetalhes.innerHTML = `
+                    <span>Adultos (${adultsCount}x)</span>
+                    <span>R$ ${totalPrice}</span>
+                `;
+            }
+        
+            const totalElement = document.querySelector('.d-flex.justify-content-between.fw-bold .text-primary');
+            if (totalElement) {
+                totalElement.textContent = `R$ ${totalPrice}`;
+            }
+        
+
+            const orderNumber = 'BM' + new Date().getFullYear() + Math.floor(Math.random() * 100000);
+            const orderTitle = document.querySelector('.mb-5');
+            if (orderTitle) {
+                orderTitle.textContent = `Pedido #${orderNumber}`;
+            }
+        
+            localStorage.clear();
+        });
+        </script>
+
+        <script src="js/authNavbar.js"></script>
     </body>
 
 </html>
