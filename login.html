@@ -42,7 +42,7 @@
   </script>
   <script type="module">
     import { authService } from './js/api.js';
-    document.getElementById('loginForm').addEventListener('submit', (event) => {
+    document.getElementById('loginForm').addEventListener('submit',async (event) => {
       event.preventDefault();
       const email = document.getElementById('loginEmail').value;
       const senha = document.getElementById('loginPassword').value;
@@ -52,7 +52,10 @@
       };
 
       try{
-        const data =authService.login(loginDTO);
+        const data = await authService.login(loginDTO);
+        if(data.token){
+          trocarTelaHome();
+        }
       }
       catch{
         console.log('Erro ao fazer login');
