@@ -45,11 +45,14 @@
     document.getElementById('loginForm').addEventListener('submit', (event) => {
       event.preventDefault();
       const email = document.getElementById('loginEmail').value;
-      console.log(email);
       const senha = document.getElementById('loginPassword').value;
+      const loginDTO = { 
+        email:email,
+        senha: senha 
+      };
 
       try{
-        const data =authService.login({email, senha});
+        const data =authService.login(loginDTO);
       }
       catch{
         console.log('Erro ao fazer login');
