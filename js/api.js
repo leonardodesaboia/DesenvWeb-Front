@@ -56,15 +56,16 @@ export const passeioService = {
         return response.json();
     },
 
-    async criar(passeioData) {
-        const response = await fetch(`${API_BASE_URL}/passeio`, {
-            method: 'POST',
-            headers: getHeaders(),
-            body: JSON.stringify(passeioData)
-        });
-        if (!response.ok) throw new Error('Erro ao criar passeio');
-        return response.json();
-    },
+        async criar(passeioData) {
+            const response = await fetch(`${API_BASE_URL}/passeio`, {
+                method: 'POST',
+                headers: getHeaders(), // Adapte para incluir token se necessário
+                body: JSON.stringify(passeioData),
+            });
+            if (!response.ok) throw new Error('Erro ao criar passeio');
+            return response.json();
+        },
+    
 
     async atualizar(id, passeioData) {
         const response = await fetch(`${API_BASE_URL}/passeio/${id}`, {
@@ -91,10 +92,15 @@ export const reservaService = {
     async criar(reservaData) {
         const response = await fetch(`${API_BASE_URL}/reserva`, {
             method: 'POST',
-            headers: getHeaders(),
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
             body: JSON.stringify(reservaData)
         });
-        if (!response.ok) throw new Error('Erro ao criar reserva');
+        if (!response.ok) {
+            throw new Error('Erro ao criar reserva');
+        }
         return response.json();
     },
 
