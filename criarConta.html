@@ -43,6 +43,12 @@
   </section>
 
   <script>
+      function trocarTela() {
+        window.location.href = "http://127.0.0.1:5501/login.html";
+      }
+  </script>
+
+  <script>
     function formatarTelefone(input) {
       let telefone = input.value;
       telefone = telefone.replace(/\D/g, '');
@@ -76,9 +82,11 @@
       }
       try{
         const data = authService.register(newUserDTO);
+        trocarTela();
       }
       catch{
-        console.log('Erro ao criar conta');
+        document.getElementById('registerResponse').textContent = 'Erro ao criar conta. Verifique seus dados.';
+        document.getElementById('registerResponse').style.color = 'red';
       }
     });
 
