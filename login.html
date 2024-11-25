@@ -22,9 +22,7 @@
             <input type="password" id="loginPassword" name="senha">
             <label for="loginPassword">Senha</label>
           </div>
-          <div class="forget">
-            <a href="./ForgotPassword.html" id="forgot-password">Esqueci a senha</a>
-          </div>
+
           <button type="submit" id="button-entrance">Entrar</button>
           <button type="button" onclick="trocarTela()" id="button-create-account">Criar conta</button>
         </form>
@@ -55,7 +53,6 @@
         headers: {
           'Content-Type': 'application/json; charset= utf-8'
         },
-
         body: JSON.stringify({ "email": `${email}`, "senha": `${password}` })
       })
       .then(response => response.json())
