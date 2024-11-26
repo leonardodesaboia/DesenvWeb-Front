@@ -25,6 +25,11 @@ export const authService = {
         const data = await response.json();
         localStorage.setItem('name', data.name);
         localStorage.setItem('token', data.token);
+
+        const tokenArray = data.token.split('.');
+        const tokenPayload = JSON.parse(atob(tokenArray[1]))
+        const CPF = tokenPayload.cpf
+        
         localStorage.setItem('role', data.role);
         localStorage.setItem('userId', data.id);
         return data;
