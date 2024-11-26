@@ -55,12 +55,6 @@ function createPasseioCard(passeio) {
 
     element.innerHTML = `
         <div class="package-item">
-            <div class="overflow-hidden">
-                <img class="img-fluid" style="height: 350px; width: 500px;" 
-                     src="img/${passeio.lugar.toLowerCase().replace(/\s+/g, '-')}.jpg" 
-                     alt="${passeio.lugar}"
-                     onerror="this.src='img/placeholder.jpg'">
-            </div>
             <div class="d-flex border-bottom">
                 <small class="flex-fill text-center border-end py-2">
                     <i class="fa fa-map-marker-alt text-primary me-2"></i>${passeio.lugar}

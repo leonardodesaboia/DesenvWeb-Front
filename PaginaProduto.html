@@ -96,21 +96,12 @@
                 <div class="col-lg-6">
                     <h6 class="section-title bg-white text-start text-primary pe-3" style="color:#ffc107 !important">Sobre o Destino</h6>
                     <h1 class="mb-4">Bem-vindo ao Paraíso do <span class="text-primary" style="color:#ffc107 !important">Cumbuco</span></h1>
-                    <p class="mb-4">Descubra a beleza única da Praia do Cumbuco, um verdadeiro paraíso localizado a apenas 30km de Fortaleza. Com suas dunas majestosas, lagoas de água doce e um mar perfeito para esportes aquáticos, o Cumbuco oferece uma experiência inesquecível para todos os visitantes.</p>
                     <div class="row g-3 pb-4">
                         <div class="col-sm-4">
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center p-3">
                                     <i class="fa fa-clock fa-2x text-primary mb-2"></i>
                                     <h6 class="mb-0 duration">Horário<small class="d-block"></small></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="border rounded p-1">
-                                <div class="border rounded text-center p-3">
-                                    <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                    <h6 class="mb-0 capacity">Capacidade<small class="d-block"></small></h6>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +137,7 @@
                 <div class="d-flex align-items-center gap-3 mb-3 p-3 bg-light rounded">
                     <div>
                         <p class="mb-0">Adultos</p>
-                        <small class="text-muted">R$ 180,00 por pessoa</small>
+                        <small class="text-muted">{{valor}} por pessoa</small>
                     </div>
                     <div class="input-group" style="width: 150px;">
                         <button class="btn btn-outline-secondary" type="button" onclick="decrementAdults()">
@@ -166,28 +157,15 @@
                 <div class="row g-2">
                     <div class="col-md-3 col-6">
                         <input type="radio" class="btn-check" name="tourTime" id="time1" value="2024-11-26">
-                        <label class="btn btn-outline-primary w-100" for="time1">26/11</label>
+                        <label class="btn btn-outline-primary w-100" for="time1">${data}</label>
                     </div>
-                    <div class="col-md-3 col-6">
-                        <input type="radio" class="btn-check" name="tourTime" id="time2" value="2024-11-27">
-                        <label class="btn btn-outline-primary w-100" for="time2">27/11</label>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <input type="radio" class="btn-check" name="tourTime" id="time3" value="2024-11-28">
-                        <label class="btn btn-outline-primary w-100" for="time3">28/11</label>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <input type="radio" class="btn-check" name="tourTime" id="time4" value="2024-11-29">
-                        <label class="btn btn-outline-primary w-100" for="time4">29/11</label>
-                    </div>
-                </div>
             </div>
 
             <!-- Total e Botão de Reserva -->
             <div class="pt-4">
                 <div class="d-flex justify-content-between align-items-center mb-4 pt-2 border-top mt-2">
                     <span class="h5 mb-0 fw-bold">Total:</span>
-                    <span class="h4 mb-0 fw-bold" id="totalPrice">R$ 180.00</span>
+                    <span class="h4 mb-0 fw-bold" id="totalPrice">${valor}</span>
                 </div>
                 <button class="btn btn-primary w-100 py-3" onclick="bookTour()">
                     Reservar Agora
@@ -322,7 +300,7 @@
 <script src="js/auth.nav.js"></script>
 <script src="js/api.js" type="module"></script>
 <script src="js/booking.js" type="module"></script>
-<script src="js/produto-detalhes.js"></script>
+<script type="module" src="js/produto-detalhes.js"></script>
 
 </body>
 </html>

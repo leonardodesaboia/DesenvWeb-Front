@@ -121,53 +121,72 @@ export const passeioService = {
 // Serviço de Reservas
 export const reservaService = {
     async criar(reservaData) {
-        try {
-            const token = localStorage.getItem('token');
-            console.log('Token:', token);
-            console.log('Dados da reserva:', reservaData);
-
-            if (!token) {
-                throw new Error('Usuário não autenticado');
-            }
-
-            const response = await fetch(`${API_BASE_URL}/reserva`, {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    id_passeio: reservaData.id_passeio,
-                    id_cliente: reservaData.id_cliente,
-                    valor_total: reservaData.valor_total,
-                    data: reservaData.data
-                })
-            });
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Resposta do servidor:', errorText);
-                throw new Error(errorText || 'Erro ao criar reserva');
-            }
-
-            const responseData = await response.json();
-            console.log('Resposta sucesso:', responseData);
-            return responseData;
-        } catch (error) {
-            console.error('Erro detalhado:', error);
-            throw error;
+      try {
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
+        console.log('Dados da reserva:', reservaData);
+  
+        if (!token) {
+          throw new Error('Usuário não autenticado');
         }
+  
+        const response = await fetch(`${API_BASE_URL}/reserva`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            id_passeio: reservaData.id_passeio,
+            id_cliente: reservaData.id_cliente,
+            valor_total: reservaData.valor_total,
+            data: reservaData.data,
+            capacidade: reservaData.capacidade,
+            descricao: reservaData.descricao,
+            numero_pessoas: reservaData.numero_pessoas
+          })
+        });
+  
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Resposta do servidor:', errorText);
+          throw new Error(errorText || 'Erro ao criar reserva');
+        }
+  
+        const responseData = await response.json();
+        console.log('Resposta sucesso:', responseData);
+        return responseData;
+      } catch (error) {
+        console.error('Erro detalhado:', error);
+        throw error;
+      }
     },
 
-
     async confirmarReserva(id) {
-        const response = await fetch(`${API_BASE_URL}/reserva/confirmar/${id}`, {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await fetch(`${API_BASE_URL}/reserva/confirmar/${id}`, {
             method: 'PUT',
-            headers: getHeaders(),
-        });
-        if (!response.ok) throw new Error('Erro ao atualizar status');
-        return response.json();
-    }
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          });
+      
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Resposta do servidor:', errorText);
+            throw new Error(errorText || 'Erro ao confirmar reserva');
+          }
+      
+          const responseData = await response.json();
+          console.log('Resposta sucesso:', responseData);
+          return responseData;
+        } catch (error) {
+          console.error('Erro detalhado:', error);
+          throw error;
+        }
+      }
 };
 
 // Serviço de Usuários (Admin)
