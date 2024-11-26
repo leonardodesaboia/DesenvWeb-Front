@@ -164,7 +164,6 @@ export const reservaService = {
         const response = await fetch(`${API_BASE_URL}/reserva/confirmar/${id}`, {
             method: 'PUT',
             headers: getHeaders(),
-            body: JSON.stringify({ status })
         });
         if (!response.ok) throw new Error('Erro ao atualizar status');
         return response.json();

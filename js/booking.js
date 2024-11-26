@@ -1,71 +1,27 @@
 // booking.js
 let adultsCount = 1;
-const PRICE_PER_PERSON = 180.00;
+let currentPasseio = null;
 
-async function bookTour() {
+async function loadPasseioData() {
+    const passeioId = localStorage.getItem('currentPasseioId');
+    if (!passeioId) return;
+
     try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            alert('Por favor, faça login primeiro');
-            window.location.href = '/login.html';
-            return;
-        }
-
-        const selectedDate = document.querySelector('input[name="tourTime"]:checked');
-        if (!selectedDate) {
-            alert('Por favor, selecione uma data para o passeio');
-            return;
-        }
-
-        const userId = localStorage.getItem('userId');
-        if (!userId) {
-            alert('Erro: ID do usuário não encontrado');
-            return;
-        }
-
-        const totalPrice = adultsCount * PRICE_PER_PERSON;
-
-        // Salvar informações para a página de pagamento
-        localStorage.setItem('adultsCount', adultsCount.toString());
-        localStorage.setItem('selectedDate', selectedDate.value);
-        localStorage.setItem('totalPrice', totalPrice.toFixed(2));
-
-        const reservaData = {
-            id_passeio: 1,
-            id_cliente: parseInt(userId),
-            valor_total: totalPrice,
-            data: selectedDate.value
-        };
-
-        console.log('Enviando dados da reserva:', reservaData);
-
-        const response = await fetch('http://localhost:8080/reserva', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(reservaData)
-        });
-        const data = await response.json();
-        localStorage.setItem('reservaId', data.ID_reserva); // Salvar o ID da reserva
-        window.location.href = 'PaginaPagamento.html';
-
-        if (!response.ok) {
-            throw new Error('Erro ao criar reserva');
-        }
-
-        // Redirecionar para a página de pagamento
-        window.location.href = 'PaginaPagamento.html';
+        const response = await fetch(`${API_BASE_URL}/passeio/${passeioId}`);
+        if (!response.ok) throw new Error('Erro ao carregar dados do passeio');
         
+        currentPasseio = await response.json();
+        updateTotalPrice();
     } catch (error) {
-        console.error('Erro ao fazer reserva:', error);
-        alert('Erro ao fazer reserva: ' + error.message);
+        console.error('Erro ao carregar dados do passeio:', error);
     }
 }
 
 function incrementAdults() {
-    if (adultsCount < 8) {
+    if (currentPasseio && adultsCount < currentPasseio.capacidade) {
+        adultsCount++;
+        updateUI();
+    } else if (!currentPasseio && adultsCount < 8) {
         adultsCount++;
         updateUI();
     }
@@ -87,17 +43,22 @@ function updateUI() {
 }
 
 function updateTotalPrice() {
-    const total = adultsCount * PRICE_PER_PERSON;
+    if (!currentPasseio) return;
+    
+    const total = adultsCount * currentPasseio.valor;
     const totalElement = document.getElementById('totalPrice');
     if (totalElement) {
         totalElement.textContent = `R$ ${total.toFixed(2)}`;
     }
 }
 
-// Inicializar a UI
-document.addEventListener('DOMContentLoaded', updateUI);
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    loadPasseioData();
+    updateUI();
+});
 
-// Expor funções necessárias globalmente
-window.bookTour = bookTour;
+// Exportar funções necessárias
 window.incrementAdults = incrementAdults;
 window.decrementAdults = decrementAdults;
+window.bookTour = bookTour;
