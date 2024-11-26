@@ -1,17 +1,67 @@
 // booking.js
-const PRICE_PER_PERSON = 180.00;
 let adultsCount = 1;
+const PRICE_PER_PERSON = 180.00;
 
-async function checkUserAuthenticated() {
-    const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
-    
-    if (!token) {
-        alert('Por favor, faça login primeiro');
-        window.location.href = '/Login.html';
-        return false;
+async function bookTour() {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Por favor, faça login primeiro');
+            window.location.href = '/login.html';
+            return;
+        }
+
+        const selectedDate = document.querySelector('input[name="tourTime"]:checked');
+        if (!selectedDate) {
+            alert('Por favor, selecione uma data para o passeio');
+            return;
+        }
+
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            alert('Erro: ID do usuário não encontrado');
+            return;
+        }
+
+        const totalPrice = adultsCount * PRICE_PER_PERSON;
+
+        // Salvar informações para a página de pagamento
+        localStorage.setItem('adultsCount', adultsCount.toString());
+        localStorage.setItem('selectedDate', selectedDate.value);
+        localStorage.setItem('totalPrice', totalPrice.toFixed(2));
+
+        const reservaData = {
+            id_passeio: 1,
+            id_cliente: parseInt(userId),
+            valor_total: totalPrice,
+            data: selectedDate.value
+        };
+
+        console.log('Enviando dados da reserva:', reservaData);
+
+        const response = await fetch('http://localhost:8080/reserva', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(reservaData)
+        });
+        const data = await response.json();
+        localStorage.setItem('reservaId', data.ID_reserva); // Salvar o ID da reserva
+        window.location.href = 'PaginaPagamento.html';
+
+        if (!response.ok) {
+            throw new Error('Erro ao criar reserva');
+        }
+
+        // Redirecionar para a página de pagamento
+        window.location.href = 'PaginaPagamento.html';
+        
+    } catch (error) {
+        console.error('Erro ao fazer reserva:', error);
+        alert('Erro ao fazer reserva: ' + error.message);
     }
-    return true;
 }
 
 function incrementAdults() {
@@ -44,64 +94,10 @@ function updateTotalPrice() {
     }
 }
 
-async function bookTour() {
-    try {
-        if (!await checkUserAuthenticated()) {
-            return;
-        }
+// Inicializar a UI
+document.addEventListener('DOMContentLoaded', updateUI);
 
-        const selectedDate = document.querySelector('input[name="tourTime"]:checked');
-        if (!selectedDate) {
-            alert('Por favor, selecione uma data para o passeio');
-            return;
-        }
-
-        const userId = localStorage.getItem('userId');
-        
-        if (!userId) {
-            alert('Erro: ID do usuário não encontrado');
-            return;
-        }
-
-        const reservaData = {
-            id_passeio: 1,
-            id_cliente: parseInt(userId),
-            valor_total: adultsCount * PRICE_PER_PERSON,
-            data: selectedDate.value
-        };
-
-        console.log('Enviando dados da reserva:', reservaData);
-
-        const response = await fetch('http://localhost:8080/reserva', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(reservaData)
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText || 'Erro ao criar reserva');
-        }
-
-        const result = await response.json();
-        console.log('Reserva criada com sucesso:', result);
-        alert('Reserva realizada com sucesso!');
-        
-    } catch (error) {
-        console.error('Erro ao fazer reserva:', error);
-        alert('Erro ao fazer reserva. Por favor, tente novamente.');
-    }
-}
-
-// Inicializar
-document.addEventListener('DOMContentLoaded', () => {
-    updateUI();
-});
-
-// Exportar funções para o window
+// Expor funções necessárias globalmente
+window.bookTour = bookTour;
 window.incrementAdults = incrementAdults;
 window.decrementAdults = decrementAdults;
-window.bookTour = bookTour;

@@ -161,3 +161,55 @@ Aí você substitui esse resumo da compra pelo bloco de nota e tirar o script da
     document.getElementById('summary-time').textContent = selectedDate;
     document.getElementById('summary-total').textContent = `R$ ${totalPrice}`;
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Recupera os dados do localStorage
+    const adultsCount = localStorage.getItem('adultsCount') || '1';
+    const selectedDate = localStorage.getItem('selectedDate') || '';
+    const totalPrice = localStorage.getItem('totalPrice') || '180.00';
+    const reservaId = localStorage.getItem('reservaId'); // Novo: pegar ID da reserva
+    
+    // Preenche os campos de resumo
+    document.getElementById('summary-adults').textContent = adultsCount;
+    document.getElementById('summary-adults-price').textContent = `R$ ${totalPrice}`;
+    document.getElementById('summary-time').textContent = selectedDate;
+    document.getElementById('summary-total').textContent = `R$ ${totalPrice}`;
+});
+
+async function checkPayment() {
+    try {
+        const reservaId = localStorage.getItem('reservaId');
+        const token = localStorage.getItem('token');
+
+        if (!reservaId || !token) {
+            alert('Erro: Informações da reserva não encontradas');
+            return;
+        }
+
+        const response = await fetch(`http://localhost:8080/reserva/confirmar/${reservaId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao confirmar pagamento');
+        }
+
+        // Limpar dados do localStorage
+        localStorage.removeItem('adultsCount');
+        localStorage.removeItem('selectedDate');
+        localStorage.removeItem('totalPrice');
+        localStorage.removeItem('reservaId');
+
+        alert('Pagamento confirmado com sucesso! Você receberá um e-mail com os detalhes da sua reserva.');
+        window.location.href = 'ResumoPedido.html';
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao confirmar pagamento. Por favor, tente novamente.');
+    }
+}
+</script>
+    
