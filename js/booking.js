@@ -1,71 +1,107 @@
+// booking.js
+const PRICE_PER_PERSON = 180.00;
 let adultsCount = 1;
-const adultPrice = 180;
 
-function updatePrice() {
-    const total = (adultsCount * adultPrice);
-    document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
+async function checkUserAuthenticated() {
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+    
+    if (!token) {
+        alert('Por favor, faça login primeiro');
+        window.location.href = '/Login.html';
+        return false;
+    }
+    return true;
 }
 
 function incrementAdults() {
     if (adultsCount < 8) {
         adultsCount++;
-        document.getElementById('adultsCount').value = adultsCount;
-        updatePrice();
+        updateUI();
     }
 }
 
 function decrementAdults() {
     if (adultsCount > 1) {
         adultsCount--;
-        document.getElementById('adultsCount').value = adultsCount;
-        updatePrice();
+        updateUI();
+    }
+}
+
+function updateUI() {
+    const countInput = document.getElementById('adultsCount');
+    if (countInput) {
+        countInput.value = adultsCount;
+        updateTotalPrice();
+    }
+}
+
+function updateTotalPrice() {
+    const total = adultsCount * PRICE_PER_PERSON;
+    const totalElement = document.getElementById('totalPrice');
+    if (totalElement) {
+        totalElement.textContent = `R$ ${total.toFixed(2)}`;
     }
 }
 
 async function bookTour() {
     try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            alert('Por favor, faça login para realizar a reserva.');
-            window.location.href = '/login.html';
+        if (!await checkUserAuthenticated()) {
             return;
         }
 
-        // Captura os dados do formulário
-        const quantidade_pessoas = document.getElementById('adultsCount').value;
-        const data_passeio = document.querySelector('input[name="tourTime"]:checked')?.value;
+        const selectedDate = document.querySelector('input[name="tourTime"]:checked');
+        if (!selectedDate) {
+            alert('Por favor, selecione uma data para o passeio');
+            return;
+        }
+
+        const userId = localStorage.getItem('userId');
         
-        if (!data_passeio) {
-            alert('Por favor, selecione um dia para o passeio.');
+        if (!userId) {
+            alert('Erro: ID do usuário não encontrado');
             return;
         }
 
-        const valor_total = quantidade_pessoas * adultPrice;
-
-        // Cria o objeto reserva
-        const reservaDTO = {
-            quantidade_pessoas: parseInt(quantidade_pessoas),
-            data_passeio,
-            valor_total,
-            passeio_id: 1 // ID do passeio do Cumbuco
+        const reservaData = {
+            id_passeio: 1,
+            id_cliente: parseInt(userId),
+            valor_total: adultsCount * PRICE_PER_PERSON,
+            data: selectedDate.value
         };
 
-        // Envia a reserva para o backend
-        const response = await reservaService.criar(reservaDTO);
+        console.log('Enviando dados da reserva:', reservaData);
 
-        if (response) {
-            // Armazena os dados para a página de confirmação
-            localStorage.setItem('reservaAtual', JSON.stringify({
-                id: response.id,
-                quantidade_pessoas,
-                data_passeio,
-                valor_total: valor_total.toFixed(2)
-            }));
+        const response = await fetch('http://localhost:8080/reserva', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(reservaData)
+        });
 
-            alert('Reserva realizada com sucesso!');
-            window.location.href = "PaginaPagamento.html";
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Erro ao criar reserva');
         }
+
+        const result = await response.json();
+        console.log('Reserva criada com sucesso:', result);
+        alert('Reserva realizada com sucesso!');
+        
     } catch (error) {
-        alert('Erro ao realizar reserva: ' + (error.message || 'Tente novamente mais tarde'));
+        console.error('Erro ao fazer reserva:', error);
+        alert('Erro ao fazer reserva. Por favor, tente novamente.');
     }
 }
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', () => {
+    updateUI();
+});
+
+// Exportar funções para o window
+window.incrementAdults = incrementAdults;
+window.decrementAdults = decrementAdults;
+window.bookTour = bookTour;

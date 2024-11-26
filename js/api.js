@@ -27,10 +27,9 @@ export const authService = {
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
         return data;
-
-
-    
     },
+
+
 
     async register(userData) {
         const response = await fetch(`${API_BASE_URL}/user`, {
@@ -43,6 +42,7 @@ export const authService = {
         }
         return response.json();
     },
+
 
     logout() {
         console.log('Executando logout...'); // Log para verificar
@@ -63,15 +63,38 @@ export const passeioService = {
         return response.json();
     },
 
-        async criar(passeioData) {
+    async criar(passeioData) {
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token armazenado:', token);
+
+            if (!token) {
+                throw new Error('Token não encontrado');
+            }
+
             const response = await fetch(`${API_BASE_URL}/passeio`, {
                 method: 'POST',
-                headers: getHeaders(), // Adapte para incluir token se necessário
-                body: JSON.stringify(passeioData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(passeioData)
             });
-            if (!response.ok) throw new Error('Erro ao criar passeio');
-            return response.json();
-        },
+
+            console.log('Status da resposta:', response.status);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Erro detalhado:', errorText);
+                throw new Error(`Erro ao criar passeio: ${response.status} - ${errorText}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Erro completo:', error);
+            throw error;
+        }
+    },
     
 
     async atualizar(id, passeioData) {
@@ -97,18 +120,42 @@ export const passeioService = {
 // Serviço de Reservas
 export const reservaService = {
     async criar(reservaData) {
-        const response = await fetch(`${API_BASE_URL}/reserva`, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(reservaData)
-        });
-        if (!response.ok) {
-            throw new Error('Erro ao criar reserva');
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+            console.log('Dados da reserva:', reservaData);
+
+            if (!token) {
+                throw new Error('Usuário não autenticado');
+            }
+
+            const response = await fetch(`${API_BASE_URL}/reserva`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id_passeio: reservaData.id_passeio,
+                    id_cliente: reservaData.id_cliente,
+                    valor_total: reservaData.valor_total,
+                    data: reservaData.data
+                })
+            });
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Resposta do servidor:', errorText);
+                throw new Error(errorText || 'Erro ao criar reserva');
+            }
+
+            const responseData = await response.json();
+            console.log('Resposta sucesso:', responseData);
+            return responseData;
+        } catch (error) {
+            console.error('Erro detalhado:', error);
+            throw error;
         }
-        return response.json();
     },
 
 

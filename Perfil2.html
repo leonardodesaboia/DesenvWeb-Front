@@ -11,6 +11,7 @@
     <nav class="navbar">
         <span class="navbar-brand">Bem-vindo ao seu Perfil</span>
         <button id="logout-btn" class="btn btn-warning">Sair</button>
+        <button id="voltar-btn" class="btn btn-voltar" style="margin-right: 94%; background-color:lightblue;">Voltar</button>
     </nav>
 
     <div class="container">
@@ -84,6 +85,10 @@
             if (confirmLogout) {
                 window.location.href = "index.html";
             }
+        });
+
+        document.getElementById('voltar-btn').addEventListener('click', () => {
+                window.location.href = "index.html";
         });
     </script>
         
