@@ -3,6 +3,7 @@ const API_BASE_URL = 'http://localhost:8080';
 // Configuração padrão dos headers
 const getHeaders = () => {
     const token = localStorage.getItem('token');
+    console.log('ola');
     return {
         'Content-Type': 'application/json',
         'Authorization': token ? `Bearer ${token}` : ''
@@ -63,8 +64,13 @@ export const authService = {
 export const passeioService = {
     async listarTodos() {
         const response = await fetch(`${API_BASE_URL}/passeio`, {
-            headers: getHeaders()
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         });
+        console.log('oi')
         if (!response.ok) throw new Error('Erro ao buscar passeios');
         return response.json();
     },
@@ -142,15 +148,14 @@ export const reservaService = {
             'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
-            id_passeio: reservaData.id_passeio,
             id_cliente: reservaData.id_cliente,
+            id_passeio: reservaData.id_passeio,
             valor_total: reservaData.valor_total,
-            data: reservaData.data,
-            capacidade: reservaData.capacidade,
-            descricao: reservaData.descricao,
-            numero_pessoas: reservaData.numero_pessoas
           })
         });
+
+        const data = await response.json();
+        localStorage.setItem('userId', data.id_cliente);
   
         if (!response.ok) {
           const errorText = await response.text();
@@ -160,6 +165,7 @@ export const reservaService = {
   
         const responseData = await response.json();
         console.log('Resposta sucesso:', responseData);
+        window.location.href = '/PaginaPagamento.html';
         return responseData;
       } catch (error) {
         console.error('Erro detalhado:', error);

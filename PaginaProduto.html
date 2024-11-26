@@ -157,7 +157,7 @@
                 <div class="row g-2">
                     <div class="col-md-3 col-6">
                         <input type="radio" class="btn-check" name="tourTime" id="time1" value="2024-11-26">
-                        <label class="btn btn-outline-primary w-100" for="time1">${data}</label>
+                        <label class="btn btn-outline-primary w-100" for="time1">{{data}}</label>
                     </div>
             </div>
 
@@ -165,7 +165,7 @@
             <div class="pt-4">
                 <div class="d-flex justify-content-between align-items-center mb-4 pt-2 border-top mt-2">
                     <span class="h5 mb-0 fw-bold">Total:</span>
-                    <span class="h4 mb-0 fw-bold" id="totalPrice">${valor}</span>
+                    <span class="h4 mb-0 fw-bold" id="totalPrice">{{valor}}</span>
                 </div>
                 <button class="btn btn-primary w-100 py-3" onclick="bookTour()">
                     Reservar Agora
@@ -300,8 +300,6 @@
  <script src="js/auth.nav.js" type="module"></script>
 <script src="js/api.js" type="module"></script>
 <script src="js/booking.js" type="module"></script>
-<script type="module" src="js/produto-detalhes.js"></script>
-
 
 </body>
 </html>

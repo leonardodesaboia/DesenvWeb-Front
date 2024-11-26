@@ -113,7 +113,47 @@ Aí você substitui esse resumo da compra pelo bloco de nota e tirar o script da
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    async function checkPayment() {
+        try {
+            const reservaId = localStorage.getItem('reservaId');
+            console.log(reservaId);
+            const token = localStorage.getItem('token');
+    
+            if (!reservaId) {
+                qualquerbosta();
+                throw new Error('ID da reserva não encontrado');
+            }
+    
+            if (!token) {
+                throw new Error('Token não encontrado');
+            }
+            
+            console.log('Iniciando confirmação de pagamento para reserva:', reservaId);
+    
+            const response = await fetch(`http://localhost:8080/reserva/confirmar/${reservaId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Resposta de erro:', errorText);
+                throw new Error(errorText || 'Erro ao confirmar pagamento');
+            }
+    
+    
+            alert('Pagamento confirmado com sucesso! Você receberá um e-mail com os detalhes da sua reserva.');
+            window.location.href = 'ResumoPedido.html';
+        } catch (error) {
+            console.error('Erro completo:', error);
+            alert('Erro ao confirmar pagamento: ' + error.message);
+        }
+    }
+
+    function qualquerbosta() {
         // Recupera os dados do localStorage
         const adultsCount = localStorage.getItem('adultsCount') || '1';
         const selectedDate = localStorage.getItem('selectedDate') || '';
@@ -140,45 +180,8 @@ Aí você substitui esse resumo da compra pelo bloco de nota e tirar o script da
         document.getElementById('summary-adults-price').textContent = `R$ ${totalPrice}`;
         document.getElementById('summary-time').textContent = selectedDate;
         document.getElementById('summary-total').textContent = `R$ ${totalPrice}`;
-    });
+    };
     
-    async function checkPayment() {
-        try {
-            const reservaId = localStorage.getItem('reservaId');
-            const token = localStorage.getItem('token');
-    
-            if (!reservaId) {
-                throw new Error('ID da reserva não encontrado');
-            }
-    
-            if (!token) {
-                throw new Error('Token não encontrado');
-            }
-    
-            console.log('Iniciando confirmação de pagamento para reserva:', reservaId);
-    
-            const response = await fetch(`http://localhost:8080/reserva/confirmar/${reservaId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-    
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Resposta de erro:', errorText);
-                throw new Error(errorText || 'Erro ao confirmar pagamento');
-            }
-    
-    
-            alert('Pagamento confirmado com sucesso! Você receberá um e-mail com os detalhes da sua reserva.');
-            window.location.href = 'ResumoPedido.html';
-        } catch (error) {
-            console.error('Erro completo:', error);
-            alert('Erro ao confirmar pagamento: ' + error.message);
-        }
-    }
     
     function copyPixCode() {
         const pixInput = document.querySelector('.input-group input');
