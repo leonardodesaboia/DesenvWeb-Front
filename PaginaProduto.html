@@ -34,11 +34,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="#home" class="nav-item nav-link active">Home</a>
-                <a href="#about" class="nav-item nav-link">Sobre</a>
-                <a href="#services" class="nav-item nav-link">Serviços</a>
-                <a href="#packages" class="nav-item nav-link">Promoções</a>
-                <a href="#contact" class="nav-item nav-link">Contato</a>
+                <a href="/index.html" class="nav-item nav-link active">Home</a>
+                <a href="/index.html#about" class="nav-item nav-link">Sobre</a>
+                <a href="/index.html#services" class="nav-item nav-link">Serviços</a>
+                <a href="/index.html#passeios" class="nav-item nav-link">Passeios</a>
+                <a href="/index.html#contact" class="nav-item nav-link">Contato</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Destinos</a>
                     <div class="dropdown-menu m-0">
@@ -49,7 +49,8 @@
                     </div>
                 </div>
             </div>
-            <a href="Login.html" class="btn btn-primary rounded-pill py-2 px-4">Registrar</a>
+            <a href="Login.html" class="btn btn-primary rounded-pill py-2 px-4" id="register-button">Registrar</a>
+
         </div>
     </nav>
     <!-- Navbar End -->
@@ -95,21 +96,12 @@
                 <div class="col-lg-6">
                     <h6 class="section-title bg-white text-start text-primary pe-3" style="color:#ffc107 !important">Sobre o Destino</h6>
                     <h1 class="mb-4">Bem-vindo ao Paraíso do <span class="text-primary" style="color:#ffc107 !important">Cumbuco</span></h1>
-                    <p class="mb-4">Descubra a beleza única da Praia do Cumbuco, um verdadeiro paraíso localizado a apenas 30km de Fortaleza. Com suas dunas majestosas, lagoas de água doce e um mar perfeito para esportes aquáticos, o Cumbuco oferece uma experiência inesquecível para todos os visitantes.</p>
                     <div class="row g-3 pb-4">
                         <div class="col-sm-4">
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center p-3">
                                     <i class="fa fa-clock fa-2x text-primary mb-2"></i>
-                                    <h6 class="mb-0">Duração<small class="d-block">9 horas</small></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="border rounded p-1">
-                                <div class="border rounded text-center p-3">
-                                    <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                    <h6 class="mb-0">Grupo<small class="d-block">Max 8 pessoas</small></h6>
+                                    <h6 class="mb-0 duration">Horário<small class="d-block"></small></h6>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +109,7 @@
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center p-3">
                                     <i class="fa fa-map-marker-alt fa-2x text-primary mb-2"></i>
-                                    <h6 class="mb-0">Distância<small class="d-block">30 km</small></h6>
+                                    <h6 class="mb-0 location">Local<small class="d-block"></small></h6>
                                 </div>
                             </div>
                         </div>
@@ -145,7 +137,7 @@
                 <div class="d-flex align-items-center gap-3 mb-3 p-3 bg-light rounded">
                     <div>
                         <p class="mb-0">Adultos</p>
-                        <small class="text-muted">R$ 180,00 por pessoa</small>
+                        <small class="text-muted">{{valor}} por pessoa</small>
                     </div>
                     <div class="input-group" style="width: 150px;">
                         <button class="btn btn-outline-secondary" type="button" onclick="decrementAdults()">
@@ -164,29 +156,16 @@
                 <label class="form-label fw-bold">Data do Passeio</label>
                 <div class="row g-2">
                     <div class="col-md-3 col-6">
-                        <input type="radio" class="btn-check" name="tourTime" id="time1" value="26/11">
-                        <label class="btn btn-outline-primary w-100" for="time1">26/11</label>
+                        <input type="radio" class="btn-check" name="tourTime" id="time1" value="2024-11-26">
+                        <label class="btn btn-outline-primary w-100" for="time1">{{data}}</label>
                     </div>
-                    <div class="col-md-3 col-6">
-                        <input type="radio" class="btn-check" name="tourTime" id="time2" value="27/11">
-                        <label class="btn btn-outline-primary w-100" for="time2">27/11</label>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <input type="radio" class="btn-check" name="tourTime" id="time3" value="28/11">
-                        <label class="btn btn-outline-primary w-100" for="time3">28/11</label>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <input type="radio" class="btn-check" name="tourTime" id="time4" value="29/11">
-                        <label class="btn btn-outline-primary w-100" for="time4">29/11</label>
-                    </div>
-                </div>
             </div>
 
             <!-- Total e Botão de Reserva -->
-            <div class="border-top pt-4">
+            <div class="pt-4">
                 <div class="d-flex justify-content-between align-items-center mb-4 pt-2 border-top mt-2">
                     <span class="h5 mb-0 fw-bold">Total:</span>
-                    <span class="h4 mb-0 fw-bold" id="totalPrice">R$ 180.00</span>
+                    <span class="h4 mb-0 fw-bold" id="totalPrice">{{valor}}</span>
                 </div>
                 <button class="btn btn-primary w-100 py-3" onclick="bookTour()">
                     Reservar Agora
@@ -309,74 +288,18 @@
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <!-- React e dependências para o formulário de reserva -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/lucide-react@0.263.1"></script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 
-    <script type="module">
-        import { reservaService } from './js/api.js';
-        window.reservaService = reservaService;
-    </script>
-    <script>
 
-        // Função para criar data às 8h
-        function createDateAt8AM(dateString) {
-            // Converte a string da data (ex: "26/11") para um objeto Date
-            const [day, month] = dateString.split('/');
-            const date = new Date(new Date().getFullYear(), month - 1, day);
-            date.setHours(8, 0, 0, 0); // Define para 8:00:00
-            return date.toISOString(); // Retorna no formato ISO
-        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-    const bookingForm = document.getElementById('bookingForm');
-    
-    if (bookingForm) {
-        bookingForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            
-            try {
-                if (!localStorage.getItem('token')) {
-                    alert('Por favor, faça login para realizar a reserva.');
-                    window.location.href = '/login.html';
-                    return;
-                }
+<script type = "module">
 
-                const selectedDate = document.querySelector('input[name="tourTime"]:checked').value;
-                const dateAt8AM = createDateAt8AM(selectedDate);
+  </script>
+ <script src="js/auth.nav.js" type="module"></script>
+<script src="js/api.js" type="module"></script>
+<script src="js/booking.js" type="module"></script>
 
-                const reservaDTO = {
-                    ID_cliente: parseInt(localStorage.getItem('userId')),
-                    ID_passeio: 1,
-                    valor_total: Number(document.getElementById('totalPrice').textContent.replace('R$ ', '')),
-                    data_reserva: dateAt8AM
-                };
-
-                const data = await reservaService.criar(reservaDTO);
-                
-                if (data) {
-                    localStorage.setItem('reservaAtual', JSON.stringify({
-                        id: data.ID_reserva,
-                        ...reservaDTO,
-                        data_formatada: selectedDate // Para exibição
-                    }));
-                    alert('Reserva realizada com sucesso!');
-                    window.location.href = '/PaginaPagamento.html';
-                }
-            } catch (error) {
-                document.getElementById('bookingResponse').textContent = 'Erro ao criar reserva. Tente novamente.';
-                document.getElementById('bookingResponse').style.color = 'red';
-                console.error('Erro:', error);
-            }
-        });
-    }
-});
-    </script>
-    <script src="js/booking.js"></script>
-<script src="js/auth.nav.js"></script>
 </body>
 </html>

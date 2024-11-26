@@ -11,17 +11,14 @@ const updateNavbar = () => {
 
     if (token && userName) {
         // Substitui o botão "Registrar" pelo nome e ícone de perfil
+        
+
         registerButton.outerHTML = `
             <div class="nav-item dropdown">
                 <a href="${userRole === 'ADM' ? 'paginaADM.html' : 'Perfil2.html'}" 
-                   class="nav-link dropdown-toggle" 
-                   id="userDropdown" 
                    role="button">
                     <i class="fas fa-user me-2"></i>${userName}
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" id="logout-button" href="#">Sair</a></li>
-                </ul>
             </div>
         `;
         setupLogoutButton();

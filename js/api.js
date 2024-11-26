@@ -3,6 +3,7 @@ const API_BASE_URL = 'http://localhost:8080';
 // Configuração padrão dos headers
 const getHeaders = () => {
     const token = localStorage.getItem('token');
+    console.log('ola');
     return {
         'Content-Type': 'application/json',
         'Authorization': token ? `Bearer ${token}` : ''
@@ -25,12 +26,17 @@ export const authService = {
         const data = await response.json();
         localStorage.setItem('name', data.name);
         localStorage.setItem('token', data.token);
+
+        const tokenArray = data.token.split('.');
+        const tokenPayload = JSON.parse(atob(tokenArray[1]))
+        const CPF = tokenPayload.cpf
+        
         localStorage.setItem('role', data.role);
+        localStorage.setItem('userId', data.id);
         return data;
-
-
-    
     },
+
+
 
     async register(userData) {
         const response = await fetch(`${API_BASE_URL}/user`, {
@@ -43,6 +49,7 @@ export const authService = {
         }
         return response.json();
     },
+
 
     logout() {
         console.log('Executando logout...'); // Log para verificar
@@ -57,21 +64,49 @@ export const authService = {
 export const passeioService = {
     async listarTodos() {
         const response = await fetch(`${API_BASE_URL}/passeio`, {
-            headers: getHeaders()
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         });
+        console.log('oi')
         if (!response.ok) throw new Error('Erro ao buscar passeios');
         return response.json();
     },
 
-        async criar(passeioData) {
+    async criar(passeioData) {
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token armazenado:', token);
+
+            if (!token) {
+                throw new Error('Token não encontrado');
+            }
+
             const response = await fetch(`${API_BASE_URL}/passeio`, {
                 method: 'POST',
-                headers: getHeaders(), // Adapte para incluir token se necessário
-                body: JSON.stringify(passeioData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(passeioData)
             });
-            if (!response.ok) throw new Error('Erro ao criar passeio');
-            return response.json();
-        },
+
+            console.log('Status da resposta:', response.status);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Erro detalhado:', errorText);
+                throw new Error(`Erro ao criar passeio: ${response.status} - ${errorText}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Erro completo:', error);
+            throw error;
+        }
+    },
     
 
     async atualizar(id, passeioData) {
@@ -97,30 +132,72 @@ export const passeioService = {
 // Serviço de Reservas
 export const reservaService = {
     async criar(reservaData) {
-        const response = await fetch(`${API_BASE_URL}/reserva`, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(reservaData)
-        });
-        if (!response.ok) {
-            throw new Error('Erro ao criar reserva');
+      try {
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
+        console.log('Dados da reserva:', reservaData);
+  
+        if (!token) {
+          throw new Error('Usuário não autenticado');
         }
-        return response.json();
+  
+        const response = await fetch(`${API_BASE_URL}/reserva`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            id_cliente: reservaData.id_cliente,
+            id_passeio: reservaData.id_passeio,
+            valor_total: reservaData.valor_total,
+          })
+        });
+
+        const data = await response.json();
+        localStorage.setItem('userId', data.id_cliente);
+  
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Resposta do servidor:', errorText);
+          throw new Error(errorText || 'Erro ao criar reserva');
+        }
+  
+        const responseData = await response.json();
+        console.log('Resposta sucesso:', responseData);
+        window.location.href = '/PaginaPagamento.html';
+        return responseData;
+      } catch (error) {
+        console.error('Erro detalhado:', error);
+        throw error;
+      }
     },
 
-
     async confirmarReserva(id) {
-        const response = await fetch(`${API_BASE_URL}/reserva/confirmar/${id}`, {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await fetch(`${API_BASE_URL}/reserva/confirmar/${id}`, {
             method: 'PUT',
-            headers: getHeaders(),
-            body: JSON.stringify({ status })
-        });
-        if (!response.ok) throw new Error('Erro ao atualizar status');
-        return response.json();
-    }
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          });
+      
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Resposta do servidor:', errorText);
+            throw new Error(errorText || 'Erro ao confirmar reserva');
+          }
+      
+          const responseData = await response.json();
+          console.log('Resposta sucesso:', responseData);
+          return responseData;
+        } catch (error) {
+          console.error('Erro detalhado:', error);
+          throw error;
+        }
+      }
 };
 
 // Serviço de Usuários (Admin)

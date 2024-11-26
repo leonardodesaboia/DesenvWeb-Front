@@ -27,6 +27,11 @@ body {
     right: 20px;
 }
 
+#voltar-btn{
+    position: absolute;
+    right: 20px;
+}
+
 .profile-card, .booking-section {
     background-color: #ffffff;
     border-radius: 8px;
@@ -91,6 +96,13 @@ table tr:nth-child(odd) {
 }
 
 .btn-warning {
+    background-color: #FFD700;
+    border: none;
+    color: #333333;
+    padding: 10px 15px;
+}
+
+.btn-voltar {
     background-color: #FFD700;
     border: none;
     color: #333333;
