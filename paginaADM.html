@@ -123,9 +123,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/admpasseio.js"></script> 
     <script src="js/admreserva.js"></script> 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete">
-</script>
 
 </body>
 </html>
+<script type="module">
+    import { authService } from './js/api.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const logoutButton = document.getElementById('logout-btn');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                authService.logout(); // Chama a função de logout do api.js
+            });
+        }
+    });
+    document.getElementById('logout-btn').addEventListener('click', () => {
+        const confirmLogout = confirm('Tem certeza que deseja sair?');
+        if (confirmLogout) {
+            window.location.href = "index.html";
+        }
+    });
+</script>

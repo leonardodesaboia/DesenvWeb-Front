@@ -25,7 +25,11 @@ export const authService = {
         const data = await response.json();
         localStorage.setItem('name', data.name);
         localStorage.setItem('token', data.token);
+        localStorage.setItem('role', data.role);
         return data;
+
+
+    
     },
 
     async register(userData) {
@@ -41,9 +45,12 @@ export const authService = {
     },
 
     logout() {
-        localStorage.removeItem('token');
-        window.location.href = '/login.html';
+        console.log('Executando logout...'); // Log para verificar
+        localStorage.clear();
+        console.log('LocalStorage limpo. Redirecionando...');
+        window.location.href = '/index.html';
     }
+    
 };
 
 // Serviço de Passeios

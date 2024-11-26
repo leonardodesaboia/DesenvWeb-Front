@@ -86,5 +86,24 @@
             }
         });
     </script>
+        
+    <script type="module">
+        import { authService } from './js/api.js';
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoutButton = document.getElementById('logout-btn');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    authService.logout(); // Chama a função de logout do api.js
+                });
+            }
+        });
+    </script>
+    
+        
+
+
+    
 </body>
 </html>
