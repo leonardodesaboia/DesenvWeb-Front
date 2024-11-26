@@ -79,7 +79,6 @@
                     <div class="mb-3 position-relative">
                         <label for="tour-location" class="form-label">Localização</label>
                         <input type="text" id="tour-location" class="form-control" placeholder="Digite um endereço" required>
-                        <ul id="location-suggestions" class="list-group mt-2" style="display: none; position: absolute; width: 100%; z-index: 1000;"></ul>
                     </div>
 
                     <!-- Data -->
@@ -123,6 +122,38 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/admpasseio.js"></script> 
     <script src="js/admreserva.js"></script> 
+
+<script>
+    document.getElementById('create-tour-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const nome = document.getElementById('tour-name').value;
+    const lugar = document.getElementById('tour-location').value; // Mapeando "lugar"
+    const descricao = document.getElementById('tour-description').value;
+    const data = document.getElementById('tour-date').value; // Date em formato `YYYY-MM-DD`
+    const hora = document.getElementById('tour-time').value; // Hora em formato `HH:mm:ss`
+    const valor = parseFloat(document.getElementById('tour-price').value);
+
+    const passeioData = {
+        nome,
+        lugar,
+        descricao,
+        data,
+        hora,
+        valor,
+    };
+
+    try {
+        const response = await passeioService.criar(passeioData);
+        alert('Passeio criado com sucesso!');
+        console.log(response); // Loga o retorno da API no console
+        document.getElementById('create-tour-form').reset();
+    } catch (error) {
+        alert('Erro ao criar o passeio. Verifique os dados.');
+        console.error(error);
+    }
+});
+</script>
 
 </body>
 </html>
