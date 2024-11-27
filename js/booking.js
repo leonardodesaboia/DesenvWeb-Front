@@ -133,6 +133,10 @@ async function reservarPasseio() {
         data: selectedDateElement.value
     };
 
+    localStorage.setItem('adultsCount', adultsCount);
+    localStorage.setItem('selectedDate', selectedDateElement.value);
+    localStorage.setItem('totalPrice', adultsCount * passeioValor);
+
     try {
         const reservaResponse = await reservaService.criar(reservaData);
         

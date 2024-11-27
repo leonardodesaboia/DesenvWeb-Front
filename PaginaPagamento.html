@@ -51,14 +51,13 @@ Aí você substitui esse resumo da compra pelo bloco de nota e tirar o script da
             <!-- Resumo da Compra -->
             <div class="col-lg-4">
                 <div class="payment-info p-4">
-                    <h4 class="mb-4">Resumo da Reserva</h4>
+                    <h4 id="passeio-name" class="mb-4">{{Nome}}</h4>
                     <div class="d-flex justify-content-between mb-2">
-                        <span id="passeio-name">{{Nome}}</span>
                         <span>Adultos (x<span id="summary-adults">1</span>)</span>
                         <span id="summary-adults-price">{{valor}}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Horário</span>
+                        <span>Data</span>
                         <span id="summary-time">{{Horario}}</span>
                     </div>
                     <hr>
@@ -116,89 +115,6 @@ Aí você substitui esse resumo da compra pelo bloco de nota e tirar o script da
 <script src="js/pagamento.js"></script>
 
 
-<script>
-    async function checkPayment() {
-        try {
-            const reservaId = localStorage.getItem('reservaId');
-            console.log(reservaId);
-            const token = localStorage.getItem('token');
-    
-            if (!reservaId) {
-                qualquerbosta();
-                throw new Error('ID da reserva não encontrado');
-            }
-    
-            if (!token) {
-                throw new Error('Token não encontrado');
-            }
-            
-            console.log('Iniciando confirmação de pagamento para reserva:', reservaId);
-    
-            const response = await fetch(`http://localhost:8080/reserva/confirmar/${reservaId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-    
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Resposta de erro:', errorText);
-                throw new Error(errorText || 'Erro ao confirmar pagamento');
-            }
-    
-    
-            alert('Pagamento confirmado com sucesso! Você receberá um e-mail com os detalhes da sua reserva.');
-            window.location.href = 'ResumoPedido.html';
-        } catch (error) {
-            console.error('Erro completo:', error);
-            alert('Erro ao confirmar pagamento: ' + error.message);
-        }
-    }
 
-    function qualquerbosta() {
-        // Recupera os dados do localStorage
-        const adultsCount = localStorage.getItem('adultsCount') || '1';
-        const selectedDate = localStorage.getItem('selectedDate') || '';
-        const totalPrice = localStorage.getItem('totalPrice') || '180.00';
-        const reservaId = localStorage.getItem('reservaId');
-        
-        console.log('Dados carregados na página de pagamento:', {
-            adultsCount,
-            selectedDate,
-            totalPrice,
-            reservaId
-        });
-        
-        // Verifica se tem o ID da reserva
-        if (!reservaId) {
-            console.error('ID da reserva não encontrado no localStorage');
-            alert('Erro: Informações da reserva não encontradas');
-            window.location.href = 'index.html';
-            return;
-        }
-        
-        // Preenche os campos de resumo
-        document.getElementById('summary-adults').textContent = adultsCount;
-        document.getElementById('summary-adults-price').textContent = `R$ ${totalPrice}`;
-        document.getElementById('summary-time').textContent = selectedDate;
-        document.getElementById('summary-total').textContent = `R$ ${totalPrice}`;
-    };
-    
-    
-    function copyPixCode() {
-        const pixInput = document.querySelector('.input-group input');
-        pixInput.select();
-        document.execCommand('copy');
-        
-        const copyButton = document.querySelector('.copy-button');
-        const originalText = copyButton.innerHTML;
-        copyButton.innerHTML = '<i class="fas fa-check me-2"></i>Copiado!';
-        setTimeout(() => {
-            copyButton.innerHTML = originalText;
-        }, 2000);
-    }
-    </script>
     
     

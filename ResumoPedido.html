@@ -198,9 +198,9 @@
                     <button class="btn btn-primary py-3 px-5" onclick="window.print()">
                         <i class="fa fa-print me-2"></i>Imprimir Comprovante
                     </button>
-                    <a href="index.html" class="btn btn-outline-primary py-3 px-5 ms-3">
+                    <button onclick="limparLocalStorage()" class="btn btn-outline-primary py-3 px-5 ms-3">
                         <i class="fa fa-home me-2"></i>Voltar ao Início
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -273,6 +273,7 @@
             const adultsCount = localStorage.getItem('adultsCount');
             const selectedDate = localStorage.getItem('selectedDate');
             const totalPrice = localStorage.getItem('totalPrice');
+            
         
             document.querySelector('[data-tour-date]').textContent = `Data do Passeio: ${selectedDate}`;
         
@@ -295,8 +296,17 @@
             if (orderTitle) {
                 orderTitle.textContent = `Pedido #${orderNumber}`;
             }
+        
         });
+
+        function limparLocalStorage() {
+            localStorage.removeItem('adultsCount');
+            localStorage.removeItem('selectedDate');
+            localStorage.removeItem('totalPrice');
+            window.location.href = "http://127.0.0.1:5500/index.html";
+        }
         </script>
+
 
         <script src="js/auth.nav.js" type="module"></script>
     </body>
