@@ -153,9 +153,6 @@ export const reservaService = {
             valor_total: reservaData.valor_total,
           })
         });
-
-        const data = await response.json();
-        localStorage.setItem('userId', data.id_cliente);
   
         if (!response.ok) {
           const errorText = await response.text();
