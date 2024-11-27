@@ -17,11 +17,16 @@
     <div class="container">
         <!-- Cartão de perfil do usuário -->
         <div class="profile-card">
-            <img src="https://via.placeholder.com/100" alt="Foto do usuário">
-            <h2>Nome Completo</h2>
-            <p><strong>Email:</strong> <span id="email">usuario@email.com</span></p>
-            <p><strong>CPF:</strong > 000.000.000-00</p>
+            <img id="profile-picture" src="https://via.placeholder.com/150" alt="Foto do usuário" class="rounded-circle">
+            <h2 id="user-name">Nome Completo</h2>
+            <p><strong>Email:</strong> <span id="user-email">usuario@email.com</span></p>
+            <p><strong>CPF:</strong> <span id="user-cpf">000.000.000-00</span></p>
+        
+            <!-- Botão para atualizar imagem de perfil -->
+            <input type="file" id="upload-profile-picture" accept="image/*" style="display: none;">
+            <button id="change-profile-picture-btn" class="btn btn-light mt-3">Alterar Foto de Perfil</button>
         </div>
+        
 
         <!-- Seção de reservas -->
         <div class="booking-section">
@@ -99,12 +104,71 @@
             if (logoutButton) {
                 logoutButton.addEventListener('click', (event) => {
                     event.preventDefault();
-                    authService.logout(); // Chama a função de logout do api.js
+                    authService.logout(); 
                 });
             }
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Carregar dados armazenados no localStorage
+            const storedPicture = localStorage.getItem('profilePicture');
+            const userName = localStorage.getItem('name');
+            const userEmail = localStorage.getItem('email');
+            const userCpf = localStorage.getItem('cpf');
+        
+            // Atualizar os campos da página
+            const profilePicture = document.getElementById('profile-picture');
+            if (storedPicture) {
+                profilePicture.src = storedPicture; // Atualiza com a imagem do localStorage
+            }
+            if (userName) document.getElementById('user-name').textContent = userName;
+            if (userEmail) document.getElementById('user-email').textContent = userEmail;
+            if (userCpf) document.getElementById('user-cpf').textContent = userCpf;
+        
+            // Gerenciar o botão de upload
+            const uploadInput = document.getElementById('upload-profile-picture');
+            const changeButton = document.getElementById('change-profile-picture-btn');
+        
+            changeButton.addEventListener('click', () => {
+                uploadInput.click(); // Abre o seletor de arquivos
+            });
+        
+            uploadInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+        
+                    reader.onload = (e) => {
+                        const imageData = e.target.result;
+                        // Atualiza a imagem no HTML
+                        profilePicture.src = imageData;
+                        // Armazena a imagem no localStorage
+                        localStorage.setItem('profilePicture', imageData);
+                    };
+        
+                    reader.readAsDataURL(file); // Lê o arquivo como Base64
+                } else {
+                    alert('Nenhuma imagem selecionada!');
+                }
+            });
+
+            if (userCpf) {
+            const formattedCpf = userCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            document.getElementById('user-cpf').textContent = formattedCpf;
+}
+
+        });
+
+        
+        
+    </script>
     
+    
+    
+    
+    <script src="js/api.js" type="module"></script>
         
 
 
