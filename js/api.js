@@ -134,43 +134,87 @@ export const passeioService = {
 // Serviço de Reservas
 export const reservaService = {
     async criar(reservaData) {
-      try {
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
-        console.log('Dados da reserva:', reservaData);
-  
-        if (!token) {
-          throw new Error('Usuário não autenticado');
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+            console.log('Dados da reserva:', reservaData);
+
+            if (!token) {
+                throw new Error('Usuário não autenticado');
+            }
+
+            const response = await fetch(`${API_BASE_URL}/reserva`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    id_cliente: reservaData.id_cliente,
+                    id_passeio: reservaData.id_passeio,
+                    valor_total: reservaData.valor_total,
+                    data: reservaData.data,
+                    status: reservaData.status,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Erro ao criar reserva:', errorText);
+                throw new Error(errorText || 'Erro ao criar reserva');
+            }
+
+            const responseData = await response.json();
+            console.log('Reserva criada com sucesso:', responseData);
+
+            // Salva no localStorage
+            let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+            reservas.push(responseData);
+            localStorage.setItem('reservas', JSON.stringify(reservas));
+
+            console.log('Reserva armazenada no localStorage:', reservas);
+
+            // Redireciona ou retorna os dados
+            return responseData;
+        } catch (error) {
+            console.error('Erro ao criar reserva:', error);
+            throw error;
         }
-  
-        const response = await fetch(`${API_BASE_URL}/reserva`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            id_cliente: reservaData.id_cliente,
-            id_passeio: reservaData.id_passeio,
-            valor_total: reservaData.valor_total,
-          })
-        });
-  
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('Resposta do servidor:', errorText);
-          throw new Error(errorText || 'Erro ao criar reserva');
-        }
-  
-        const responseData = await response.json();
-        console.log('Resposta sucesso:', responseData);
-        window.location.href = '/PaginaPagamento.html';
-        return responseData;
-      } catch (error) {
-        console.error('Erro detalhado:', error);
-        throw error;
-      }
     },
+    async listarReservasPorCliente(clienteId) {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Usuário não autenticado');
+            }
+    
+            const response = await fetch(`${API_BASE_URL}/reserva/cliente/${clienteId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Erro ao carregar reservas:', errorText);
+                throw new Error(errorText || 'Erro ao carregar reservas');
+            }
+    
+            const reservas = await response.json();
+            console.log('Reservas carregadas do servidor:', reservas);
+    
+            // Salvar as reservas no localStorage (opcional)
+            localStorage.setItem('reservas', JSON.stringify(reservas));
+    
+            return reservas;
+        } catch (error) {
+            console.error('Erro ao carregar reservas:', error);
+            throw error;
+        }
+    },
+    
 
     async confirmarReserva(id) {
         try {

@@ -4,6 +4,8 @@ let currentPasseio = null;
 let adultsCount = 1;
 let passeioValor = 0;
 
+  
+
 async function loadPasseioDetails() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
@@ -133,8 +135,9 @@ async function reservarPasseio() {
 
     try {
         const reservaResponse = await reservaService.criar(reservaData);
+        
         console.log('Reserva criada com sucesso:', reservaResponse);
-        window.location.href = 'PaginaPagamento.html';
+        window.location.href = 'perfil2.html';
     } catch (error) {
         console.error('Erro ao criar reserva:', error);
         alert('Erro ao criar reserva. Por favor, tente novamente.');

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -30,41 +31,11 @@
 
         <!-- Seção de reservas -->
         <div class="booking-section">
-            <h3>Tabela de Reservas e Passeios</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Passeio</th>
-                        <th>Data</th>
-                        <th>Horário</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="reservas-body">
-                    <tr>
-                        <td>1</td>
-                        <td>Passeio nas Dunas</td>
-                        <td>2024-12-10</td>
-                        <td>10:00</td>
-                        <td style="color: green;">Confirmado</td>
-                        <td>
-                            <button class="btn cancel">CANCELAR</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Praia de Jericoacoara</td>
-                        <td>2024-12-15</td>
-                        <td>08:00</td>
-                        <td style="color: green;">Confirmado</td>
-                        <td>
-                            <button class="btn cancel">CANCELAR</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="reservas-container"></div>
+
+        
+              
+              
         </div>
     </div>
 
@@ -97,8 +68,7 @@
     </script>
         
     <script type="module">
-        import { authService } from './js/api.js';
-    
+        import { authService } from './js/api.js'; 
         document.addEventListener('DOMContentLoaded', () => {
             const logoutButton = document.getElementById('logout-btn');
             if (logoutButton) {
@@ -160,16 +130,51 @@
 }
 
         });
-
-        
-        
+    </script>
+    <script type="module">
+        import { reservaService } from './js/api.js';
+    
+        document.addEventListener('DOMContentLoaded', async () => {
+            const reservasContainer = document.getElementById('reservas-container');
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    reservasContainer.innerHTML = '<p>Você precisa estar logado para ver suas reservas.</p>';
+                    return;
+                }
+                const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+                const clienteId = tokenPayload.id;
+    
+                const reservas = await reservaService.listarReservasPorCliente(clienteId);
+    
+                if (!reservas || reservas.length === 0) {
+                    reservasContainer.innerHTML = '<p>Nenhuma reserva encontrada.</p>';
+                    return;
+                }
+    
+                reservasContainer.innerHTML = ''; // Limpa o contêiner
+                reservas.forEach((reserva) => {
+                    const reservaElement = document.createElement('div');
+                    reservaElement.classList.add('reserva-item');
+                    reservaElement.innerHTML = `
+                        <p><strong>Passeio:</strong> ${reserva.passeio.nome}</p>
+                        <p><strong>Data:</strong> ${reserva.data}</p>
+                        <p><strong>Valor Total:</strong> R$ ${reserva.valorTotal}</p>
+                        <p><strong>Status:</strong> ${reserva.status}</p>
+                        <hr>
+                    `;
+                    reservasContainer.appendChild(reservaElement);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar reservas:', error);
+                reservasContainer.innerHTML = '<p>Erro ao carregar reservas. Tente novamente mais tarde.</p>';
+            }
+        });
     </script>
     
     
-    
-    
-    <script src="js/api.js" type="module"></script>
-        
+    <script src="js/booking.js" type="module"></script>
+
 
 
     
