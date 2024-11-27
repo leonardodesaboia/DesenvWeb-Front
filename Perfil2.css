@@ -108,3 +108,74 @@ table tr:nth-child(odd) {
     color: #333333;
     padding: 10px 15px;
 }
+/* Estilo do card de perfil */
+.profile-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px; /* Aumentar espaço interno */
+    max-width: 500px; /* Largura máxima maior */
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Estilo da imagem de perfil */
+.profile-card img {
+    width: 200px; /* Tamanho maior da imagem */
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 30px; /* Maior espaço abaixo da imagem */
+}
+
+/* Estilo do nome */
+.profile-card h2 {
+    font-size: 28px; /* Fonte maior */
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Estilo das informações */
+.profile-card p {
+    font-size: 20px; /* Aumentar tamanho da fonte */
+    color: #34495e;
+    margin: 15px 0;
+}
+
+/* Estilo do botão */
+#change-profile-picture-btn {
+    background-color: #007bff;
+    color: white;
+    font-size: 20px; /* Tamanho maior */
+    border: none;
+    padding: 12px 25px; /* Aumentar espaço interno */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 25px; /* Maior espaço acima */
+    width: 100%;
+}
+
+#change-profile-picture-btn:hover {
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
+}
+.card {
+    border-radius: 12px;
+    background-color: #ffffff;
+}
+
+.card .btn-primary {
+    background-color: #0299fd;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.card .btn-primary:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+}
+
