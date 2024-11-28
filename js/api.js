@@ -175,6 +175,33 @@ export const reservaService = {
             throw error;
         }
     },
+
+    async deletarReserva(id) {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_BASE_URL}/cancelar/confirmar/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Resposta do servidor:', errorText);
+                throw new Error(errorText || 'Erro ao cancelar reserva');
+            }
+    
+            const responseData = await response.json();
+            console.log('Resposta sucesso:', responseData);
+            return responseData;
+        } catch (error) {
+            console.error('Erro detalhado:', error);
+            throw error;
+        }
+    },
+    
     async listarReservasPorCliente(clienteId) {
         try {
             const token = localStorage.getItem('token');
@@ -240,35 +267,6 @@ export const reservaService = {
             }
         },
         
-        
-    
-    
-
-    async confirmarReserva(id) {
-        try {
-          const token = localStorage.getItem('token');
-          const response = await fetch(`${API_BASE_URL}/reserva/confirmar/${id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            }
-          });
-      
-          if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Resposta do servidor:', errorText);
-            throw new Error(errorText || 'Erro ao confirmar reserva');
-          }
-      
-          const responseData = await response.json();
-          console.log('Resposta sucesso:', responseData);
-          return responseData;
-        } catch (error) {
-          console.error('Erro detalhado:', error);
-          throw error;
-        }
-      },
         async listarReservasPaginadas(page = 0, size = 10) {
             try {
                 const token = localStorage.getItem('token');
@@ -299,6 +297,8 @@ export const reservaService = {
                 throw error;
             }
         },
+
+        
     };
     
 
