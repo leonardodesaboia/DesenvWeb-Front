@@ -55,16 +55,7 @@
         });
 
         // Função para o botão SAIR
-        document.getElementById('logout-btn').addEventListener('click', () => {
-            const confirmLogout = confirm('Tem certeza que deseja sair?');
-            if (confirmLogout) {
-                window.location.href = "index.html";
-            }
-        });
-
-        document.getElementById('voltar-btn').addEventListener('click', () => {
-                window.location.href = "index.html";
-        });
+  
     </script>
         
     <script type="module">
@@ -77,6 +68,16 @@
                     authService.logout(); 
                 });
             }
+        });
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            const confirmLogout = confirm('Tem certeza que deseja sair?');
+            if (confirmLogout) {
+                window.location.href = "index.html";
+            }
+        });
+
+        document.getElementById('voltar-btn').addEventListener('click', () => {
+                window.location.href = "index.html";
         });
     </script>
 
@@ -128,9 +129,9 @@
             const formattedCpf = userCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
             document.getElementById('user-cpf').textContent = formattedCpf;
 }
-
         });
     </script>
+
     <script type="module">
         import { reservaService } from './js/api.js';
     
@@ -171,9 +172,6 @@
             }
         });
     </script>
-    
-    
-    <script src="js/booking.js" type="module"></script>
 
 
 
