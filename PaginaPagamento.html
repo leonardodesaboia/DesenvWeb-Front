@@ -45,8 +45,6 @@
             <h6 class="section-title bg-white text-center text-primary px-3">Pagamento</h6>
             <h1 class="mb-5">Finalizar Reserva</h1>
         </div>
-<!--Rascunho 12/11 se não quiser passar os valores do resumo de compra do PaginaProduto.html para o PaginaPagamento.html como adultos, preço, e horário é só pegar as linhas de código no seu bloco de notas!
-Aí você substitui esse resumo da compra pelo bloco de nota e tirar o script da linha 234(agora 236) até o fim-->
         <div class="row g-4 justify-content-center">
             <!-- Resumo da Compra -->
             <div class="col-lg-4">
@@ -103,7 +101,7 @@ Aí você substitui esse resumo da compra pelo bloco de nota e tirar o script da
                         </div>
                     </div>
 
-                    <button class="btn btn-primary w-100 py-3" onclick="checkPayment()">
+                    <button class="btn btn-primary w-100 py-3"  onclick="confirmarReserva(localStorage.getItem(currentPasseioID))">
                         Já realizei o pagamento
                     </button>
                 </div>
@@ -112,9 +110,12 @@ Aí você substitui esse resumo da compra pelo bloco de nota e tirar o script da
     </div>
 </div>
 
+<script type="module" src="js/api.js"></script>
 <script src="js/pagamento.js"></script>
+<script src="js/booking.js"></script>
 
 
-
+</body>
+</html>
     
     
