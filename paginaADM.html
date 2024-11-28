@@ -6,12 +6,7 @@
     <title>Painel Administrativo</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/CriarPasseio.css">
-    
-    <!-- Adicione o CSS para as sugestões -->
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="css/admpasseio.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
@@ -24,26 +19,30 @@
     </nav>
 
     <!-- Seção de Visualizar Reservas -->
-   <div class="pagination-controls">
-    <button id="prev-page" class="btn btn-secondary">Página Anterior</button>
-    <button id="next-page" class="btn btn-primary">Próxima Página</button>
-</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Cliente</th>
-            <th>Passeio</th>
-            <th>Data</th>
-            <th>Horário</th>
-            <th>Status</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody id="reservas-body">
-        <!-- Reservas serão carregadas aqui -->
-    </tbody>
-</table>
+    <section id="reservas" class="container py-5">
+        <h2 class="text-primary mb-4">Reservas</h2>
+        <div class="d-flex justify-content-end mb-3">
+            <div class="pagination-controls">
+                <button id="prev-page" class="btn btn-secondary">Página Anterior</button>
+                <button id="next-page" class="btn btn-secondary">Próxima Página</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>#</th>
+                        <th>Cliente</th>
+                        <th>Passeio</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="reservas-body">
+                    <!-- Reservas serão carregadas aqui -->
+                </tbody>
             </table>
         </div>
     </section>
@@ -51,89 +50,86 @@
     <!-- Seção de Criar Passeio -->
     <section id="criar-passeio" class="container py-5">
         <div class="row">
-            <div class="col-lg-6">
-                <!-- Formulário -->
+            <div class="col-lg-12">
                 <form id="create-tour-form" class="shadow-lg p-4 rounded-lg bg-white">
                     <h3 class="text-primary mb-4">Criar Passeio</h3>
 
-                    <!-- Nome do Passeio -->
                     <div class="mb-3">
                         <label for="tour-name" class="form-label">Nome do Passeio</label>
                         <input type="text" id="tour-name" class="form-control" placeholder="Ex: Passeio nas Dunas" required>
                     </div>
 
-                    <!-- Descrição -->
                     <div class="mb-3">
                         <label for="tour-description" class="form-label">Descrição</label>
                         <textarea id="tour-description" class="form-control" rows="3" placeholder="Descreva o passeio" required></textarea>
                     </div>
 
-                    <!-- Preço -->
                     <div class="mb-3">
                         <label for="tour-price" class="form-label">Preço por Pessoa (R$)</label>
                         <input type="number" id="tour-price" class="form-control" placeholder="Ex: 250.00" required>
                     </div>
 
-                    <!-- Localização -->
                     <div class="mb-3 position-relative">
                         <label for="tour-location" class="form-label">Localização</label>
                         <input type="text" id="tour-location" class="form-control" placeholder="Digite um endereço" required>
                     </div>
 
-                    <!-- Data -->
                     <div class="mb-3">
                         <label for="tour-date" class="form-label">Data</label>
                         <input type="date" id="tour-date" class="form-control" required>
                     </div>
 
-                    <!-- Horário -->
                     <div class="mb-3">
                         <label for="tour-time" class="form-label">Horário</label>
                         <input type="time" id="tour-time" class="form-control" required>
                     </div>
 
-                    <!-- Upload de Imagens -->
                     <div class="mb-3">
                         <label for="tour-images" class="form-label">Imagens do Passeio</label>
                         <input type="file" id="tour-images" class="form-control" accept="image/*" multiple>
                         <small class="form-text text-muted">Você pode adicionar várias imagens.</small>
                     </div>
 
-                    <!-- Botão Criar -->
                     <button type="submit" class="btn btn-primary w-100 py-2" id="create-tour-btn">Criar Passeio</button>
                 </form>
                 <p id="registerResponse" class="mt-3"></p>
             </div>
 
-            <!-- Pré-visualização -->
+            <!-- <div class="col-lg-6">
+                <div class="bg-light rounded-lg shadow-lg p-4">
+                    <h4 class="text-primary mb-4">Pré-visualização do Passeio</h4>
+                    <div id="tour-preview" class="d-flex flex-column gap-3">
+                        <h5 class="text-muted">Preencha os campos para ver a pré-visualização</h5>
+                    </div>
+                </div>
+            </div> -->
+        </div>
     </section>
 
-    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/api.js" type="module"></script>
     <script src="js/admpasseio.js" type="module"></script>
 
-
     <script type="module">
         import { reservaService } from './js/api.js';
-    
-        let currentPage = 0; // Página atual
-        const pageSize = 10; // Tamanho da página
-    
+
+        let currentPage = 0;
+        const pageSize = 10;
+
         const loadReservas = async (page) => {
             const reservasBody = document.getElementById('reservas-body');
-    
+
             try {
                 const data = await reservaService.listarReservasPaginadas(page, pageSize);
-                const reservas = data.content; // Array de reservas
+                const reservas = data.content;
                 console.log('Reservas carregadas:', reservas);
-    
+
                 if (reservas.length === 0) {
                     reservasBody.innerHTML = '<tr><td colspan="7">Nenhuma reserva encontrada nesta página.</td></tr>';
                     return;
                 }
-    
-                reservasBody.innerHTML = ''; // Limpa a tabela
+
+                reservasBody.innerHTML = '';
                 reservas.forEach((reserva, index) => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
@@ -144,13 +140,12 @@
                         <td>${reserva.passeio.horario}</td>
                         <td>${reserva.status}</td>
                         <td>
-                            <button class="btn btn-sm btn-primary" onclick="detalhesReserva(${reserva.id})">Detalhes</button>
+                            <button class="btn btn-sm" style="background-color: red; color: black;" onclick="cancelarReserva(${reserva.ID_reserva})">Canecelar reserva</button>
                         </td>
                     `;
                     reservasBody.appendChild(row);
                 });
-    
-                // Atualiza os botões de paginação
+
                 document.getElementById('prev-page').disabled = data.first;
                 document.getElementById('next-page').disabled = data.last;
             } catch (error) {
@@ -158,25 +153,22 @@
                 reservasBody.innerHTML = '<tr><td colspan="7">Erro ao carregar reservas. Tente novamente mais tarde.</td></tr>';
             }
         };
-    
+
         document.getElementById('prev-page').addEventListener('click', () => {
             if (currentPage > 0) {
                 currentPage -= 1;
                 loadReservas(currentPage);
             }
         });
-    
+
         document.getElementById('next-page').addEventListener('click', () => {
             currentPage += 1;
             loadReservas(currentPage);
         });
-    
-        // Inicializar com a página 0
+
         loadReservas(currentPage);
-    
-        window.detalhesReserva = (id) => {
-            console.log(`Detalhes da reserva ID: ${id}`);
-        };
+
+        
     </script>
-    
-    
+</body>
+</html>

@@ -138,11 +138,11 @@ export const reservaService = {
             const token = localStorage.getItem('token');
             console.log('Token:', token);
             console.log('Dados da reserva:', reservaData);
-
+    
             if (!token) {
                 throw new Error('Usuário não autenticado');
             }
-
+    
             const response = await fetch(`${API_BASE_URL}/reserva`, {
                 method: 'POST',
                 headers: {
@@ -153,28 +153,22 @@ export const reservaService = {
                     id_cliente: reservaData.id_cliente,
                     id_passeio: reservaData.id_passeio,
                     valor_total: reservaData.valor_total,
-                    data: reservaData.data,
-                    status: reservaData.status,
+                    data: reservaData.data
                 }),
             });
-
+    
             if (!response.ok) {
                 const errorText = await response.text();
                 console.error('Erro ao criar reserva:', errorText);
                 throw new Error(errorText || 'Erro ao criar reserva');
             }
-
+    
             const responseData = await response.json();
             console.log('Reserva criada com sucesso:', responseData);
-
-            // Salva no localStorage
-            let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
-            reservas.push(responseData);
-            localStorage.setItem('reservas', JSON.stringify(reservas));
-
-            console.log('Reserva armazenada no localStorage:', reservas);
-
-            // Redireciona ou retorna os dados
+    
+            // Salvar apenas o ID da reserva atual
+            localStorage.setItem('reservaId', responseData.id_reserva);
+    
             return responseData;
         } catch (error) {
             console.error('Erro ao criar reserva:', error);

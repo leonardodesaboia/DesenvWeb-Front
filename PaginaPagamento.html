@@ -101,7 +101,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary w-100 py-3"  onclick="confirmarReserva(localStorage.getItem(currentPasseioID))">
+                    <button class="btn btn-primary w-100 py-3" id="confirm-payment" onclick="confirmarReserva(localStorage.getItem('currentPasseioID'))">
                         Já realizei o pagamento
                     </button>
                 </div>
@@ -110,9 +110,10 @@
     </div>
 </div>
 
-<script type="module" src="js/api.js"></script>
 <script src="js/pagamento.js"></script>
 <script src="js/booking.js"></script>
+
+
 
 
 </body>

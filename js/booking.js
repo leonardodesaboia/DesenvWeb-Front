@@ -136,17 +136,22 @@ async function reservarPasseio() {
     localStorage.setItem('adultsCount', adultsCount);
     localStorage.setItem('selectedDate', selectedDateElement.value);
     localStorage.setItem('totalPrice', adultsCount * passeioValor);
+    localStorage.setItem('currentPasseioId', currentPasseio.id);
 
     try {
         const reservaResponse = await reservaService.criar(reservaData);
-        
         console.log('Reserva criada com sucesso:', reservaResponse);
-        window.location.href = 'perfil2.html';
+        
+        // Salvar o ID da reserva atual
+        localStorage.setItem('reservaId', reservaResponse.id_reserva); // usando id_reserva conforme retorno da API
+        
+        window.location.href = 'PaginaPagamento.html';
     } catch (error) {
         console.error('Erro ao criar reserva:', error);
         alert('Erro ao criar reserva. Por favor, tente novamente.');
     }
 }
+
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
