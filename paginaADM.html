@@ -24,24 +24,26 @@
     </nav>
 
     <!-- Seção de Visualizar Reservas -->
-    <section id="reservas" class="container py-5">
-        <h2 class="text-primary mb-4">Reservas</h2>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <th>#</th>
-                        <th>Nome do Cliente</th>
-                        <th>Passeio</th>
-                        <th>Data</th>
-                        <th>Horário</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="reservas-body">
-                    <!-- Reservas serão inseridas dinamicamente -->
-                </tbody>
+   <div class="pagination-controls">
+    <button id="prev-page" class="btn btn-secondary">Página Anterior</button>
+    <button id="next-page" class="btn btn-primary">Próxima Página</button>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Cliente</th>
+            <th>Passeio</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody id="reservas-body">
+        <!-- Reservas serão carregadas aqui -->
+    </tbody>
+</table>
             </table>
         </div>
     </section>
@@ -104,18 +106,77 @@
             </div>
 
             <!-- Pré-visualização -->
-            <div class="col-lg-6">
-                <div class="bg-light rounded-lg shadow-lg p-4">
-                    <h4 class="text-primary mb-4">Pré-visualização do Passeio</h4>
-                    <div id="tour-preview" class="d-flex flex-column gap-3">
-                        <h5 class="text-muted">Preencha os campos para ver a pré-visualização</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/api.js" type="module"></script>
     <script src="js/admpasseio.js" type="module"></script>
+
+
+    <script type="module">
+        import { reservaService } from './js/api.js';
+    
+        let currentPage = 0; // Página atual
+        const pageSize = 10; // Tamanho da página
+    
+        const loadReservas = async (page) => {
+            const reservasBody = document.getElementById('reservas-body');
+    
+            try {
+                const data = await reservaService.listarReservasPaginadas(page, pageSize);
+                const reservas = data.content; // Array de reservas
+                console.log('Reservas carregadas:', reservas);
+    
+                if (reservas.length === 0) {
+                    reservasBody.innerHTML = '<tr><td colspan="7">Nenhuma reserva encontrada nesta página.</td></tr>';
+                    return;
+                }
+    
+                reservasBody.innerHTML = ''; // Limpa a tabela
+                reservas.forEach((reserva, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1 + page * pageSize}</td>
+                        <td>${reserva.cliente.nome}</td>
+                        <td>${reserva.passeio.nome}</td>
+                        <td>${reserva.data}</td>
+                        <td>${reserva.passeio.horario}</td>
+                        <td>${reserva.status}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" onclick="detalhesReserva(${reserva.id})">Detalhes</button>
+                        </td>
+                    `;
+                    reservasBody.appendChild(row);
+                });
+    
+                // Atualiza os botões de paginação
+                document.getElementById('prev-page').disabled = data.first;
+                document.getElementById('next-page').disabled = data.last;
+            } catch (error) {
+                console.error('Erro ao carregar reservas:', error);
+                reservasBody.innerHTML = '<tr><td colspan="7">Erro ao carregar reservas. Tente novamente mais tarde.</td></tr>';
+            }
+        };
+    
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage -= 1;
+                loadReservas(currentPage);
+            }
+        });
+    
+        document.getElementById('next-page').addEventListener('click', () => {
+            currentPage += 1;
+            loadReservas(currentPage);
+        });
+    
+        // Inicializar com a página 0
+        loadReservas(currentPage);
+    
+        window.detalhesReserva = (id) => {
+            console.log(`Detalhes da reserva ID: ${id}`);
+        };
+    </script>
+    
+    

@@ -214,6 +214,40 @@ export const reservaService = {
             throw error;
         }
     },
+        async listarReservas() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('Usuário não autenticado');
+                }
+    
+                const response = await fetch(`${API_BASE_URL}/reserva`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+    
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Erro ao carregar reservas confirmadas:', errorText);
+                    throw new Error(errorText || 'Erro ao carregar reservas confirmadas');
+                }
+    
+                const data = await response.json(); // Objeto Page<Reserva>
+                console.log('Resposta do servidor:', data);
+    
+                // Acessar o array de reservas no campo "content"
+                return data.content || [];
+            } catch (error) {
+                console.error('Erro ao carregar reservas confirmadas:', error);
+                throw error;
+            }
+        },
+        
+        
+    
     
 
     async confirmarReserva(id) {
@@ -240,26 +274,38 @@ export const reservaService = {
           console.error('Erro detalhado:', error);
           throw error;
         }
-      }
-};
+      },
+        async listarReservasPaginadas(page = 0, size = 10) {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('Usuário não autenticado');
+                }
+    
+                const response = await fetch(`${API_BASE_URL}/reserva?page=${page}&size=${size}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+    
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Erro ao carregar reservas paginadas:', errorText);
+                    throw new Error(errorText || 'Erro ao carregar reservas paginadas');
+                }
+    
+                const data = await response.json(); // Objeto Page<Reserva>
+                console.log('Dados da página carregados:', data);
+    
+                return data; // Retorna o objeto completo
+            } catch (error) {
+                console.error('Erro ao carregar reservas paginadas:', error);
+                throw error;
+            }
+        },
+    };
+    
 
-// Serviço de Usuários (Admin)
-export const userService = {
-    async listarTodos() {
-        const response = await fetch(`${API_BASE_URL}/users`, {
-            headers: getHeaders()
-        });
-        if (!response.ok) throw new Error('Erro ao buscar usuários');
-        return response.json();
-    },
 
-    async atualizarRole(id, role) {
-        const response = await fetch(`${API_BASE_URL}/users/${id}/role`, {
-            method: 'PUT',
-            headers: getHeaders(),
-            body: JSON.stringify({ role })
-        });
-        if (!response.ok) throw new Error('Erro ao atualizar papel do usuário');
-        return response.json();
-    }
-};

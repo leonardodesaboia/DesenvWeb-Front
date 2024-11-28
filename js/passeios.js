@@ -38,10 +38,7 @@ function createPasseioCard(passeio) {
 
     // Descrições pré-definidas por local
     const descricoes = {
-        'Praia do Futuro': 'Desfrute de três dias inesquecíveis na famosa Praia do Futuro, onde o cenário deslumbrante do litoral cearense convida você a relaxar e aproveitar. Mergulhe nas águas cristalinas, caminhe nas areias douradas e aproveite a infraestrutura de barracas que oferecem delícias regionais e o clima acolhedor. Um verdadeiro paraíso para os amantes do mar, com brisa suave e pores do sol espetaculares.',
-        'Canoa Quebrada': 'Descubra o paraíso escondido de Canoa Quebrada, onde falésias coloridas encontram o azul infinito do mar. Aproveite três dias neste destino icônico do litoral cearense, conhecido por sua vibração boêmia e belezas naturais. Explore a vila charmosa, faça passeios emocionantes de buggy pelas dunas, e relaxe ao som das ondas tranquilas. O pôr do sol visto das dunas é uma experiência única, seguido de noites animadas com música ao vivo e a gastronomia local incomparável.',
-        'Cumbuco': 'Viva a experiência tropical em Cumbuco, destino conhecido por suas dunas, lagoas e ventos perfeitos para a prática de esportes aquáticos como kitesurf. Passe três dias imersos neste cenário paradisíaco, onde você pode relaxar ao som das ondas, fazer passeios de buggy pelas dunas ou simplesmente aproveitar a beleza natural ao redor. Aproveite o pôr do sol com uma vista privilegiada enquanto saboreia a culinária local.',
-        'Jericoacoara': 'Descubra a magia de Jericoacoara, um verdadeiro paraíso no litoral cearense. Com suas dunas douradas, lagoas de água doce e praias deslumbrantes, Jeri oferece uma experiência única. Faça passeios de buggy, pratique kitesurf, visite a famosa Pedra Furada e não perca o espetacular pôr do sol na Duna do Pôr do Sol. A vila encantadora, com suas ruas de areia e ambiente rústico-chique, completa essa experiência inesquecível.'
+       
     };
 
     // Pegar a descrição baseada no lugar ou usar a descrição padrão
